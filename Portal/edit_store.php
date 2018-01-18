@@ -1,27 +1,25 @@
 <?php include "Includes/header.php";?>
 
-<?php if(is_admin($_SESSION['u_name'])) { 
+<?php if(is_admin($_SESSION['u_name'])) {
 
 $store_query = escape($_GET['store_id']);
 
 $stmt = $conn->prepare("SELECT ID, store_ID, Location, po_specialist, orig_seal, foh_size, boh_size, Access, last_job, closing_time, comments FROM stores WHERE ID = {$store_query}");
 $stmt->execute();
 $stmt->bind_result($ID, $store_id, $location, $po_specialist, $orig_seal, $foh, $boh, $access, $last_job, $closing, $comment);
-$stmt->fetch(); 
+$stmt->fetch();
 $stmt->close();
 ?>
-
-
 <body>
 
     <div id="wrapper">
         <?php include "Includes/sidenav.php"; ?>
 
         <?php include "Includes/topnav.php"; ?>
-   
+
                     <div class="ibox-content">
 
-                       
+
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Edit Store</h1>
@@ -37,11 +35,6 @@ $stmt->close();
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-
-
-
-
-
 
     <form action="" method="POST" enctype="multipart/form-data">
 
@@ -117,10 +110,6 @@ $stmt->execute();
 $stmt->close();
 
 header("Location: edit_store.php?store_id={$ID}");
-
-
-
-
 }
  } else {
 
@@ -129,6 +118,6 @@ header("Location: edit_store.php?store_id={$ID}");
 }
 
 ?>
- </div> 
+ </div>
 
  <?php include "Includes/footer.php"; ?>

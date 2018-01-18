@@ -1,7 +1,7 @@
 <?php include "Includes/header.php";
 
-include "Includes/sidenav.php"; 
-include "Includes/topnav.php"; 
+include "Includes/sidenav.php";
+include "Includes/topnav.php";
 
 
 $event  =  escape($_GET['holiday_approve']);
@@ -18,8 +18,8 @@ $editevent =  escape($_GET['holiday_edit'])
     <div id="wrapper">
 
 
-<?php 
-if(is_manager($_SESSION['u_name'])) { 
+<?php
+if(is_manager($_SESSION['u_name'])) {
  echo "<table class='table table-hover' style='width:50%;'>
 <th>User</th>
 <th>Start Date</th>
@@ -44,17 +44,15 @@ echo "
 <td class='project-title'>{$end}</td>
 <td class='project-title'>{$signature}</td>
 <td style='top:10px; position:relative' class='project-status'><span class='label label-warning'>{$approved}</span></td>
-<td class='project-actions'><a href='booking.php?holiday_edit={$id}' class='btn btn-white btn-sm'>Edit</a><a href='booking.php?holiday_approve={$id}' class='btn btn-white btn-sm'>Approve</a></td>
-
-
-</tr>                                  
+<td class='project-actions'><a href='booking.php?holiday_edit={$id}' class='btn btn-white btn-sm'>Edit</a>"; if ($approved === "Awaiting Approval") { echo "<a href='booking.php?holiday_approve={$id}' class='btn btn-white btn-sm'>Approve</a></td>";} else {}"
+</tr>
 
 ";
 
 }
 $query->close();;
 
-} 
+}
 
 
 include "Includes/footer.php" ?>

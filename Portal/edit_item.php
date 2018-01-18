@@ -1,19 +1,11 @@
 <?php
 include_once "Includes/header.php";
- ?>
-
-<?php if(is_admin($_SESSION['u_name'])) { ?>
 
 
-
-<?php 
+ if(is_admin($_SESSION['u_name'])) {
 
 
 if (isset($_GET['edit_item'])) {
-
-
-
-
 
 $item_Id = escape($_GET['edit_item']);
 
@@ -33,21 +25,13 @@ $row = mysqli_fetch_assoc($select_item);
     $Stock_Location = $row['Stock_Location'];
 
 }
-
-
-
  ?>
-
 <body>
-
     <div id="wrapper">
-        <?php include "Includes/sidenav.php"; ?>
-
-        <?php include "Includes/topnav.php"; ?>
-   
+        <?php
+         include "Includes/sidenav.php";
+         include "Includes/topnav.php"; ?>
                     <div class="ibox-content">
-
-
                                         <div class="col-lg-12">
                     <h1 class="page-header">Alter Item</h1>
                 </div>
@@ -62,15 +46,9 @@ $row = mysqli_fetch_assoc($select_item);
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body" id="formbody">
+    <form action="" method="post" enctype="multipart/form-data">
 
 
-   
-   
-   
-   
-    <form action="" method="post" enctype="multipart/form-data">    
-     
-     
       <div class="form-group">
          <label for="title">Item Name</label>
           <input value="<?php echo htmlspecialchars(stripslashes($name));?>"  type="text" class="form-control" name="item_name">
@@ -110,31 +88,23 @@ $row = mysqli_fetch_assoc($select_item);
           <input value="<?php  echo htmlspecialchars(stripslashes($lastpurchase));
    ?>"  type="text" class="form-control" name="purchase_date">
       </div>
-    
-      
+
+
       <div class="form-group">
          <label for="post_content">Post Content</label>
          <textarea  class="form-control "name="post_content" id="" cols="30" rows="10">
-         
-        
+
+
          </textarea>
       </div>
-      
-      
 
        <div class="form-group">
           <input class="btn btn-primary" type="submit" name="update_item" value="Update Post" id="update">
       </div>
- 
-
 </form>
-
-
  <?php
-
-
   if(isset($_POST['update_item'])) {
-        
+
     $name = escape($_POST['item_name']);
     $supplier = escape($_POST['item_supplier']);
     $pexvat = escape($_POST['price_exvat']);
@@ -143,10 +113,7 @@ $row = mysqli_fetch_assoc($select_item);
     $stock = escape($_POST['stock_level']);
     $lastpurchase = escape($_POST['purchase_date']);
     $Stock_Location = escape($_POST['stock_location']);
-        
 
-
-        
           $query = "UPDATE stock_management SET ";
           $query .="prod_name  = '{$name}', ";
           $query .="supplier_name = '{$supplier}', ";
@@ -156,33 +123,21 @@ $row = mysqli_fetch_assoc($select_item);
           $query .="stock_level= '{$stock}', ";
           $query .="L_PURCHASE  = '{$lastpurchase}' ";
           $query .= "WHERE ID = {$item_Id} ";
-        
+
         $update_post = mysqli_query($connection,$query);
-        
+
         confirmQuery($update_post);
-        
+
         echo "<p class='bg-success'>Post Updated. <a href='../post.php?p_id={$name}'>View Post </a> or <a href='item_search.php'>Edit More Posts</a></p>";
 
-        header("Location:item_search.php");
-
-    
-    
+        header("Location:item_search.php");    
     }
-       
 
-
-  
   } else {
 
     header ("Location: ../index.html");
 
-
        }
 ?>
-
-
-
-                    </div>
-
-
+</div>
     </div>

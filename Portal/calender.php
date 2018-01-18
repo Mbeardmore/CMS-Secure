@@ -1,4 +1,4 @@
-<?php 
+<?php
 include "Includes/header.php";
 $sql = "SELECT * FROM events WHERE Approved = 'Approved' ";
 $req = $bdd->prepare($sql);
@@ -21,7 +21,7 @@ $events = $req->fetchAll();
                 <div id="calendar" class="col-centered">
                 </div>
         <!-- /.row -->
-        
+
         <!-- Modal -->
         <div class="modal fade" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div class="modal-dialog" role="document">
@@ -32,21 +32,20 @@ $events = $req->fetchAll();
                 <h4 class="modal-title" id="myModalLabel">Edit Event</h4>
               </div>
               <div class="modal-body">
-                
                   <div class="form-group">
                     <label for="title" class="col-sm-2 control-label">Event Title</label>
                     <div class="col-sm-10">
                       <input type="text" name="title" class="form-control" id="title" placeholder="Title">
                     </div>
                   </div>
-                    <div class="form-group"> 
+                    <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                         </div>
                     </div>
-                  
+
                   <input type="hidden" name="id" class="form-control" id="id">
-                
-                
+
+
               </div>
               <div class="modal-footer">
               </div>
@@ -65,7 +64,7 @@ $events = $req->fetchAll();
 <script>
 
     $(document).ready(function() {
-        
+
         $('#calendar').fullCalendar({
             header: {
                 left: 'prev,next today',
@@ -78,7 +77,7 @@ $events = $req->fetchAll();
             selectable: true,
             selectHelper: true,
             select: function(start, end) {
-                
+
                 $('#ModalAdd #start').val(moment(start).format('YYYY-MM-DD HH:mm:ss'));
                 $('#ModalAdd #end').val(moment(end).format('YYYY-MM-DD HH:mm:ss'));
                 $('#ModalAdd').modal('show');
@@ -91,18 +90,18 @@ $events = $req->fetchAll();
                     $('#ModalEdit').modal('show');
                 });
             },
-            eventDrop: function(event, delta, revertFunc) { 
+            eventDrop: function(event, delta, revertFunc) {
 
                 edit(event);
 
             },
-            eventResize: function(event,dayDelta,minuteDelta,revertFunc) { 
+            eventResize: function(event,dayDelta,minuteDelta,revertFunc) {
                 edit(event);
 
             },
             events: [
-            <?php foreach($events as $event): 
-            
+            <?php foreach($events as $event):
+
                 $start = explode(" ", $event['start']);
                 $end = explode(" ", $event['end']);
                 if($start[1] == '00:00:00'){
@@ -126,7 +125,7 @@ $events = $req->fetchAll();
             <?php endforeach; ?>
             ]
         });
-        
+
         function edit(event){
             start = event.start.format('YYYY-MM-DD HH:mm:ss');
             if(event.end){
@@ -134,14 +133,14 @@ $events = $req->fetchAll();
             }else{
                 end = start;
             }
-            
+
             id =  event.id;
-            
+
             Event = [];
             Event[0] = id;
             Event[1] = start;
             Event[2] = end;
-            
+
             $.ajax({
              url: 'editEventDate.php',
              type: "POST",
@@ -150,12 +149,12 @@ $events = $req->fetchAll();
                     if(rep == 'OK'){
                         alert('Saved');
                     }else{
-                        alert('Could not be saved. try again.'); 
+                        alert('Could not be saved. try again.');
                     }
                 }
             });
         }
-        
+
     });
 
 </script>

@@ -1,11 +1,8 @@
 <?php include "Includes/header.php";
 
-include "Includes/sidenav.php"; 
-include "Includes/topnav.php"; 
-
-
+include "Includes/sidenav.php";
+include "Includes/topnav.php";
 $event  =  escape($_GET['holiday_approve']);
-
 $events = $conn->prepare("UPDATE events SET Approved = 'Approved' WHERE id = ? ");
 $events->bind_param("s", $event);
 $events->execute();
@@ -18,12 +15,9 @@ $stmt->execute();
 $stmt->bind_result($id,$title,$start,$end,$signature,$Approved);
 $stmt->fetch();
 $stmt->close()
-
 ?>
 <body>
-
     <div id="wrapper">
-
 <h1>Holiday Form</h1>
 <form method="POST">
 	<label for="jobtype">Name</label>
@@ -57,16 +51,12 @@ $stmt->close()
 	echo "
 	<label for='assign'> Signature</label>
 <input type='text' class='form-control' name='Signature' style='width:50%'>
-<br> 
+<br>
 	<input class='btn-primary' type='submit' name='Submit' value='Submit'>";
 }
-
 ?>
-                
 </form>
-
-
-<?php 
+<?php
 
 if(isset($_POST['Submit'])) {
 
@@ -74,20 +64,19 @@ if(isset($_POST['Submit'])) {
 	$color      = "#02d1e0";
 	$start_date = $_POST['start_date'];
 	$end_date   = $_POST['end_date'];
-	$signature  = $_POST['Signature']; 
+	$signature  = $_POST['Signature'];
 	$status 	= 'Awaiting Approval';
-	$Status     = '2';
+	$flag     = '2';
 
 
 	$stmt = $conn->prepare("INSERT INTO events (title, color, start, `end`, signature, Approved, Code) VALUES (?,?,?,?,?,?,?) ");
-	$stmt->bind_param("ssssss", $name, $color, $start_date, $end_date, $signature, $status, $Status);
+	$stmt->bind_param("ssssssi", $name, $color, $start_date, $end_date, $signature, $status, $flag);
 	$stmt->execute();
 	$stmt->close();
 
 } else {
 
 if(isset($_POST['Update'])) {
-
 
 	$title       = $_POST['Name'];
 	$status      = $_POST['Status'];
@@ -98,7 +87,7 @@ if(isset($_POST['Update'])) {
 	$stmt = $conn->prepare("UPDATE events SET title = ?, start = ?, `end` = ?, Approved = ? WHERE id = {$id} ");
 	$stmt->bind_param("ssss", $title, $startd, $endd, $status);
 	$stmt->execute();
-	
+
 	}
 }
  ?>

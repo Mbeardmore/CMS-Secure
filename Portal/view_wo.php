@@ -1,25 +1,19 @@
-<?php 
+<?php
 include_once "Includes/header.php";
 ?>
 <body>
-
     <div id="wrapper">
-        <?php include "Includes/sidenav.php"; ?>
-
-        <?php include "Includes/topnav.php"; ?>
-   
+        <?php
+        include "Includes/sidenav.php";
+        include "Includes/topnav.php";
+        ?>
                     <div class="ibox-content" style="background-color:#f3f3f4;">
-
                         <?php
-
                       if (is_tech($_SESSION['u_name'])) {
-
           $tech = $_SESSION['u_first'];
 
           $woID = escape($_GET['view_wo']);
           $query = "SELECT * FROM work_orders WHERE ID = {$woID}";
-
-
           $select_wo = mysqli_query($connection, $query);
 
           $row = mysqli_fetch_assoc($select_wo);
@@ -103,7 +97,7 @@ include_once "Includes/header.php";
                                     </dl>
                                 </div>
                             </div>
-                           
+
                             <div class="row m-t-sm">
                                 <div class="col-lg-12">
                                 <div class="panel blank-panel">
@@ -118,7 +112,7 @@ include_once "Includes/header.php";
                                             <li class=""><a href="#tab-3" data-toggle="tab">Images</a></li>';
                                           }
                                           ?>
-                                            <?php 
+                                            <?php
                                               $accom = "SELECT * FROM acommodation WHERE work_order = '$wonum'";
                                               $result = mysqli_query($connection, $accom);
                                             if(mysqli_num_rows($result) <  1 ) {} else { ?>
@@ -141,7 +135,7 @@ include_once "Includes/header.php";
                                     <div class="feed-activity-list" style="height:400px;overflow-y: scroll;border: 1px solid #e7eaec;border-radius: 5px;;" id="message">
                                         <!-- messages go here -->
                                           <?php
-                                          
+
                                           $retmessage = "SELECT * FROM job_messages WHERE Work_Order = '$wonum' ";
                                           $retrieve = mysqli_query($connection, $retmessage);
                                           while ($ret = mysqli_fetch_assoc($retrieve)) {
@@ -150,9 +144,9 @@ include_once "Includes/header.php";
                                             $name    = $ret['u_name'];
                                             $sent    = $ret['time_added'];
 
-                                           
+
                                           ?>
-                                            
+
                                             <div class="feed-element"
                                             <a href="#" class="pull-left">
                                                <!--  <img alt="image" class="img-circle" src="img/a7.jpg"> -->
@@ -166,10 +160,10 @@ include_once "Includes/header.php";
                                                 </div>
                                             </div>
                                         </div>
-                                
+
                                           <?php } ?>
 
-                                    </div>    
+                                    </div>
                                             <form method="POST">
                                               <input type="text" name="u_message" class="form-control">
                                               <span class="input-group-btn">
@@ -189,7 +183,7 @@ include_once "Includes/header.php";
 
                                                 $mesresult = mysqli_query($connection, $addmessage);
 
-                                                confirmQuery($mesresult); 
+                                                confirmQuery($mesresult);
 
                                                 header("Location: view_wo.php?view_wo={$id}");
 
@@ -220,7 +214,7 @@ include_once "Includes/header.php";
                                      <button type="submit" class="btn btn-sm btn-primary" name="Compress" id="btnSubmit">Compress Images</button>
                                   </form>
                                   <?php } else {} ?>
-                                  <?php  
+                                  <?php
                                     if(isset($_POST['upload'])) {
                                       echo'
                                       <div id="progress-div"><div id="progress-bar"></div></div>';
@@ -268,13 +262,13 @@ include_once "Includes/header.php";
                                 </div>
 
                                 <div class="tab-pane" id="tab-4">
-                                  
-                                  <?php  
+
+                                  <?php
                                   $accom = "SELECT * FROM acommodation WHERE work_order = '$wonum'";
 
                                   $result = mysqli_query($connection, $accom);
 
-                                  $res = mysqli_fetch_assoc($result); 
+                                  $res = mysqli_fetch_assoc($result);
 
                                   $accom_type = $res['accom_type'];
                                   $address    = $res['Address'];
@@ -311,9 +305,9 @@ include_once "Includes/header.php";
 
                                 </div>
                                 </div>
-                               
+
                                  <div class="tab-pane" id="tab-5">
-                                 
+
                                   <dt>Consumable Cost<dt> <dd><dd>
                                   <br>
                                   <dt>Cleanse</dt> <dd><dd>
@@ -321,17 +315,17 @@ include_once "Includes/header.php";
                                   <dt>Defence</dt> <dd></dd>
                                   <dt>Dr Schutz PU sealer</dt> <dd></dd>
                                   <dt>Total Cost: </dt> <dd></dd>
-                                  
+
                                  </div>
                                  <?php } ?>
                                  <div style="" class="tab-pane" id="tab-6">
-                 
-                                  <?php  
+
+                                  <?php
                                    switch ($jobtype) {
 
                                       case 'Apple_Strip_FOH_Ardex':
 
-                                      if(isset($_POST['Consumables'])) { 
+                                      if(isset($_POST['Consumables'])) {
 
                                               $cleanse = escape($_POST['cleanse']);
                                               $PUSealer = escape($_POST['DrSchutz-PU']);
@@ -347,7 +341,7 @@ include_once "Includes/header.php";
                                               header("Location: view_wo.php?view_wo={$id}");
                                             }
 
-                                             echo '                           
+                                             echo '
                                             <form method="post">
                                               <dl class="dl-horizontal">
                                               <dt>Cleanse<dt><dd><input type="text" name="cleanse" class="form-control" style="width:auto;" required><dd>
@@ -364,9 +358,9 @@ include_once "Includes/header.php";
                                             </form>';
 
                                       break;
-                                      
+
                                       case 'Apple_Strip_FOH_NoArdex':
-                                             if(isset($_POST['Consumables'])) { 
+                                             if(isset($_POST['Consumables'])) {
 
                                               $cleanse = escape($_POST['cleanse']);
                                               $Defence = escape($_POST['Defence']);
@@ -374,7 +368,7 @@ include_once "Includes/header.php";
                                               $MPC = escape($_POST['Orange-MPC']);
                                               $StoneSoap = escape($_POST['Stone-Soap']);
                                               $sustain  = escape($_POST['Sustain']);
-                                              
+
 
                                               $stmt = $conn->prepare("INSERT INTO `used_items` (`date`, wo_id, cleanse, defence, PUsealer, `Orange-MPC`, `Stone-Soap`, Sustain) VALUES (?,?,?,?,?,?,?,?) ");
                                               $stmt->bind_param("siiiiiii", $date, $wonum, $cleanse, $Defence, $PUSealer, $MPC, $StoneSoap, $sustain);
@@ -382,9 +376,9 @@ include_once "Includes/header.php";
                                               $stmt->close();
                                               header("Location: view_wo.php?view_wo={$id}");
                                             }
-                                                                          
 
-                                      echo '                           
+
+                                      echo '
                                         <form method="post">
                                           <dl class="dl-horizontal">
                                           <dt>Cleanse<dt><dd><input type="text" name="cleanse" class="form-control" style="width:auto;" required><dd>
@@ -404,20 +398,20 @@ include_once "Includes/header.php";
                                           <input class="btn btn-primary" type="submit" name="Consumables" value="submit">
                                         </form>';
 
-                                      
-                                      
+
+
                                       break;
-                                      
+
                                       case 'Apple_Strip_FOH_Terrazzo':
 
-                                       if(isset($_POST['Consumables'])) { 
+                                       if(isset($_POST['Consumables'])) {
 
                                               $cleanse = escape($_POST['cleanse']);
                                               $Secura = escape($_POST['Secura']);
                                               $MPC = escape($_POST['Orange-MPC']);
                                               $StoneSoap = escape($_POST['Stone-Soap']);
                                               $Sustain = escape($_POST['Sustain']);
-                       
+
 
                                               $stmt = $conn->prepare("INSERT INTO `used_items` (`date`, wo_id, cleanse, `Orange-MPC`, `Stone-Soap`, Sustain, Secura) VALUES (?,?,?,?,?,?,?) ");
                                               $stmt->bind_param("ssiiiii", $date, $wonum, $cleanse, $MPC, $StoneSoap, $Sustain, $Secura);
@@ -426,7 +420,7 @@ include_once "Includes/header.php";
                                               header("Location: view_wo.php?view_wo={$id}");
                                             }
 
-                                       echo '                           
+                                       echo '
                                              <form method="post">
                                           <dl class="dl-horizontal">
                                           <dt>Cleanse<dt><dd><input type="text" name="cleanse" class="form-control" style="width:auto;" required><dd>
@@ -442,28 +436,28 @@ include_once "Includes/header.php";
                                           <input class="btn btn-primary" type="submit" name="Consumables" value="submit">
                                           </form>';
 
-                                      
+
                                       break;
-                                      
+
                                       case 'Apple_ardex_removal':
 
 
-                                      
+
                                       break;
-                                      
+
                                       case 'Apple_hone':
-                                      
+
                                       break;
-                                      
+
                                       case 'Apple_strip_BOH':
 
-                                       if(isset($_POST['Consumables'])) { 
+                                       if(isset($_POST['Consumables'])) {
 
                                               $TurboStrip = escape($_POST['TurboStrip']);
                                               $Secura = escape($_POST['Secura']);
                                               $Fort2 = escape($_POST['Forte2']);
                                               $Isi2 = escape($_POST['Isi2']);
-                                              
+
 
                                               $stmt = $conn->prepare("INSERT INTO `used_items` (`date`, wo_id, turbostrip, Secura, `EcoLab-Forte2`, `EcoLab-Isi2`) VALUES (?,?,?,?,?,?) ");
                                               $stmt->bind_param("ssiiii", $date, $wonum, $TurboStrip, $Secura, $Fort2, $Isi2);
@@ -473,7 +467,7 @@ include_once "Includes/header.php";
                                             }
 
 
-                                        echo '                           
+                                        echo '
                                              <form method="post">
                                           <dl class="dl-horizontal">
                                           <dt>Dr Schutz Turbo Strip<dt><dd><input type="text" name="TurboStrip" class="form-control" style="width:auto;" required><dd>
@@ -487,12 +481,12 @@ include_once "Includes/header.php";
                                           <input class="btn btn-primary" type="submit" name="Consumables" value="submit">
                                           </form>';
 
-                                            
+
                                       break;
 
                                       case 'wood_floor_rest':
 
-                                      if(isset($_POST['Consumables'])) { 
+                                      if(isset($_POST['Consumables'])) {
 
                                         $primer   = $_POST['Primer'];
                                         $lacquer  = $_POST['Lacquer'];
@@ -510,7 +504,7 @@ include_once "Includes/header.php";
                                       }
 
 
-                                         echo '                           
+                                         echo '
                                              <form method="post">
                                           <dl class="dl-horizontal">
                                           <dt>Primer 5L<dt><dd><input type="text" name="Primer" class="form-control" style="width:auto;" required><dd>
@@ -612,25 +606,25 @@ include_once "Includes/header.php";
                        $dir = "work_order_files/$wonum.$company/";
 
                        if(is_dir($dir)) {
-                    $files = scandir($dir); 
+                    $files = scandir($dir);
                     $files = array_diff($files, array('.', '..'));
 
                     foreach($files as $file){ ?>
                      <li><a href="<?php echo $dir; echo $file; ?>"><i class="fa fa-file"></i> <?php echo $file; ?></a></li>
-                    <?php 
+                    <?php
                     }
                   }
                     ?>
-                       
+
                     </ul>
                 </div>
-            </div>  
+            </div>
 
 <!-- Modal Image -->
               <div id="mymodal" class="modal">
   <!-- Modal content -->
               <div class="modal-content" style="height:75%;overflow-y:scroll;" >
-                <span class="close cursor" id="close">&times;</span>     
+                <span class="close cursor" id="close">&times;</span>
                 <div class="ibox-content" id="ibox">
 
                   <?php
@@ -645,7 +639,7 @@ include_once "Includes/header.php";
 
                       echo " <a href='Images/wo_images/{$wonum}.{$jobloc}/{$imageloc}' title='{$imageloc}' data-gallery=''><img style='height:180px;width:250px;padding-bottom:5px;text-align:center-block;' src='Images/wo_images/{$wonum}.{$jobloc}/{$imageloc}'></a> ";
 
-                    }?>   
+                    }?>
                   <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
                   <div class="slides"></div>
                   <h3 class="title"></h3>
@@ -654,11 +648,11 @@ include_once "Includes/header.php";
                   <a class="close">×</a>
                   <a class="play-pause"></a>
                   <ol class="indicator"></ol>
-                  </div> 
+                  </div>
               </div>
             </div>
           </div>
-                      
+
 <!-- Modal Image uplaod -->
               <div id="mymodal2" class="modal">
   <!-- Modal content -->
@@ -693,7 +687,7 @@ include_once "Includes/header.php";
                      <label for="title">Client Signature</label>
                         <input  type="text" class="form-control" name="Client" required="">
                 </div>
-                  
+
 
                 <label for="rating">Satisfaction Rating</label>
                 <div name="rating" required="">
@@ -745,7 +739,7 @@ include_once "Includes/header.php";
           </form>
               </div>
             <?php
-              
+
             if (isset($_POST['complete_wo'])) {
               completewo($wonum, $id);
              }
@@ -755,7 +749,7 @@ include_once "Includes/header.php";
           </div>
           </div>
 
-    
+
 <?php  include "Includes/footer.php"; ?>
 
           <script>
@@ -768,7 +762,7 @@ var btn = document.getElementById("myBtn");
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks on the button, open the modal 
+// When the user clicks on the button, open the modal
 btn.onclick = function() {
     modal.style.display = "block";
 }
