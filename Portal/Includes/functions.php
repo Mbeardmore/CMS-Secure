@@ -840,13 +840,15 @@ if (is_dir($path))
   );
   foreach($_FILES['files']['name'] as $f => $name)
     {
+
     $fileext = explode('.', $name);
     $actualExt = strtolower(end($fileext));
     if (in_array($actualExt, $valid_formats))
       {
-      move_uploaded_file($_FILES['files']['tmp_name'][$f], $path . $name);
+      $newfilename = round(microtime(true)) . '.' . $actualExt;
+      move_uploaded_file($_FILES['files']['tmp_name'][$f], $path . $newfilename);
       $query = "INSERT INTO work_order_images (wo_number, Location, Uploader) ";
-      $query .= "VALUES ('{$wonum}','{$name}','{$tech}') ";
+      $query .= "VALUES ('{$wonum}','{$newfilename}','{$tech}') ";
 
       $result = mysqli_query($connection, $query);
 
@@ -876,11 +878,10 @@ if (is_dir($path))
       $actualExt = strtolower(end($fileext));
       if (in_array($actualExt, $valid_formats))
         {
-
-        move_uploaded_file($_FILES['files']['tmp_name'][$f], $path . $name);
-
+        $newfilename = round(microtime(true)) . '.' . $actualExt;
+        move_uploaded_file($_FILES['files']['tmp_name'][$f], $path . $newfilename);
         $query = "INSERT INTO work_order_images (wo_number, Location, Uploader) ";
-        $query .= "VALUES ('{$wonum}','{$name}','{$tech}') ";
+        $query .= "VALUES ('{$wonum}','{$newfilename}','{$tech}') ";
 
         $result = mysqli_query($connection, $query);
 
@@ -930,8 +931,6 @@ global $conn;
 
                 header("Location: wo_search.php");
              }
-
-
 
 function wostatus($status) {
 
