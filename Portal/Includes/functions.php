@@ -41,8 +41,6 @@ function is_manager($username) {
     }
 }
 
-
-
 function is_tech($username) {
 
        global $conn;
@@ -247,11 +245,7 @@ function viewallusers() {
         echo "<td><a href='edit_user.php?edit_user={$id}'>Edit</a></td>";
         echo "<td><a href='manage_user.php?delete_user={$id}'>Delete</a></td>";
         echo "</tr>";
-
-
     }
-
-
 }
 
 function updateuser($userid) {
@@ -293,8 +287,6 @@ function updateuser($userid) {
       header("Location: manage_user.php");
 
     }
-
-
 }
 
 function logout() {
@@ -310,20 +302,11 @@ function usersearch()
 {
 
     global $connection;
-
     $query = "SELECT u_first FROM user;";
-
     $display_all = mysqli_query($connection, $query);
-
-
     while ($row = mysqli_fetch_assoc($display_all)) {
         $firstname       = $row['u_first'];
-
-
         echo "<option value='$firstname'>" . $firstname . "</option>";
-
-
-
     }
 
   }
@@ -590,8 +573,6 @@ while ($row = mysqli_fetch_assoc($user_wo_res)) {
 
           $dateS = new DateTime($datestart);
           $dateE = new DateTime($dateend);
-
-
             echo "
 
            <tr class='clickable-row' data-href='view_wo.php?view_wo={$id}'>
@@ -625,13 +606,6 @@ while ($row = mysqli_fetch_assoc($user_wo_res)) {
                   <a href='edit_wo.php?edit_wo={$id}' class='btn btn-white btn-sm'><i class='fa fa-pencil'></i> Edit </a>
               </td>
           </tr>";
-
-
-
-
-
-
-
   }
 
   return $count;
@@ -700,13 +674,6 @@ while ($row = mysqli_fetch_assoc($user_wo_res)) {
                   <a href='edit_wo.php?edit_wo={$id}' class='btn btn-white btn-sm'><i class='fa fa-pencil'></i> Edit </a>
               </td>
           </tr>";
-
-
-
-
-
-
-
   }
 
   return $count;
@@ -723,8 +690,6 @@ function WOSearchadmin($page_1)
 
       $count = ceil($count / 10);
       $query = "SELECT * FROM work_orders WHERE status = 'Pending' ORDER BY date_start ASC LIMIT $page_1, 10" ;
-
-
 
       $display_all = mysqli_query($connection, $query);
 
@@ -775,13 +740,6 @@ function WOSearchadmin($page_1)
                   <a href='view_wo.php?view_wo={$id}' class='btn btn-white btn-sm'><i class='fa fa-folder'></i> View </a>
               </td>
           </tr>";
-
-
-
-
-
-
-
   }
 
   return $count;
@@ -865,7 +823,6 @@ function resizeImage($SrcImage,$DestImage, $MaxWidth,$MaxHeight,$Quality)
         }
     }
 }
-
 
 function handleimages($jobloc, $wonum, $tech) {
   global $connection;
