@@ -1,10 +1,9 @@
 IndexIgnore *
 <IfModule mod_expires.c>
 # Enable expirations
-ExpiresActive On 
+ExpiresActive On
 # Default directive
-ExpiresDefault "access plus 1 month"
-# My favicon
+
 ExpiresByType image/x-icon "access plus 1 year"
 # Images
 ExpiresByType image/gif "access plus 1 month"
@@ -26,15 +25,10 @@ RewriteRule ^(index)$1 $1.php [NC,L]
 RewriteCond %{THE_REQUEST} ^GET.*index\.php [NC]
 RewriteCond %{REQUEST_URI} !/system/.* [NC]
 RewriteCond %{HTTP_HOST} ^beaverfloorcare\.com [NC]
-RewriteCond %{SERVER_PORT} 80 
+RewriteCond %{SERVER_PORT} 80
 RewriteRule ^(.*)$ https://beaverfloorcare.com/$1 [R,L]
         RewriteRule (.*?)index\.php/*(.*) /$1$2 [R=301,NE,L]
-
         # Directs all EE web requests through the site index file
         RewriteCond %{REQUEST_FILENAME} !-f
         RewriteCond %{REQUEST_FILENAME} !-d
         RewriteRule ^(.*)$ /index.php/$1 [L]
-AuthName "public_html"
-AuthUserFile "/home1/rkcezo82/.htpasswds/public_html/passwd"
-
-

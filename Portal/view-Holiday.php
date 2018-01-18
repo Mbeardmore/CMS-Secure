@@ -10,14 +10,10 @@ $events = $conn->prepare("UPDATE events SET Approved = 'Approved' WHERE ID = ? "
 $events->bind_param("s", $event);
 $events->execute();
 
-
 $editevent =  escape($_GET['holiday_edit'])
 
 ?>
-
     <div id="wrapper">
-
-
 <?php
 if(is_manager($_SESSION['u_name'])) {
  echo "<table class='table table-hover' style='width:50%;'>
@@ -32,10 +28,7 @@ $query = $conn->prepare("SELECT ID, title, start, `end`,  signature, Approved FR
 $query->execute();
 $query->bind_result($id, $title, $start, $end, $sig, $approved);
 
-
 while($query->fetch()) {
-
-
 
 echo "
 <tr class='clickable-row'>
@@ -46,13 +39,10 @@ echo "
 <td style='top:10px; position:relative' class='project-status'><span class='label label-warning'>{$approved}</span></td>
 <td class='project-actions'><a href='booking.php?holiday_edit={$id}' class='btn btn-white btn-sm'>Edit</a>"; if ($approved === "Awaiting Approval") { echo "<a href='booking.php?holiday_approve={$id}' class='btn btn-white btn-sm'>Approve</a></td>";} else {}"
 </tr>
-
 ";
 
 }
 $query->close();;
-
 }
-
 
 include "Includes/footer.php" ?>

@@ -15,7 +15,7 @@ function is_admin($username) {
 
       return true;
 
-    } else { 
+    } else {
 
       return false;
     }
@@ -35,7 +35,7 @@ function is_manager($username) {
 
       return true;
 
-    } else { 
+    } else {
 
       return false;
     }
@@ -57,7 +57,7 @@ function is_tech($username) {
 
       return true;
 
-    } else { 
+    } else {
 
       return false;
     }
@@ -76,17 +76,12 @@ function escape($string)
 
 function confirmQuery($result)
 {
-
     global $connection;
 
     if (!$result) {
 
         die("QUERY FAILED ." . " " . mysqli_error($connection));
-
-
     }
-
-
 }
 
 
@@ -299,7 +294,7 @@ function updateuser($userid) {
 
     }
 
-        
+
 }
 
 function logout() {
@@ -381,8 +376,8 @@ echo "<p class='bg-sucess'> user Deleted.";
       $combined = $wonumber . " " . $joblocation . " " . $assignedtech;
       $color = "#008000";
       $exploded = explode(",", $assignedtech);
-      
-     
+
+
       //Create directory if Work order is set
 if(!empty($_POST['wo_number'] && $_SERVER['REQUEST_METHOD'] == "POST")) {
 
@@ -424,7 +419,7 @@ if(!empty($_POST['wo_number'] && $_SERVER['REQUEST_METHOD'] == "POST")) {
       }
     }
 
-      
+
   }
       if(!empty($assigned)) {
       foreach ($exploded as $user) {
@@ -443,7 +438,7 @@ if(!empty($_POST['wo_number'] && $_SERVER['REQUEST_METHOD'] == "POST")) {
       $query .= "VALUES ('{$jobtype}','{$creator}','{$wonumber}','{$joblocation}','{$company}','{$street}','{$city}','{$datetoday}','{$startdate}','{$enddate}','{$assignedtech}','{$Jobdetails}','{$floorsize}','{$start_time}','{$active}','{$sitecontact}','{$client}','{$WOlink}') ";
       $result = mysqli_query($connection, $query);
       confirmQuery($result);
-     
+
       $calevent = "INSERT INTO events (title, color, start, end, assigned_users, work_order) ";
       $calevent .= "VALUES ('{$combined}','{$color}','{$startdate}','{$enddate}','{$assignedtech}','{$wonumber}') ";
       $calresult = mysqli_query($connection, $calevent);
@@ -483,9 +478,9 @@ function createaccomodation() {
     $query = "SELECT wo_num FROM assigned WHERE u_first = '$session' ";
 
     $result = mysqli_query($connection, $query);
-    
+
     while($row = mysqli_fetch_assoc($result)) {
-        
+
         $ID[] = $row['wo_num'];
     }
 
@@ -500,13 +495,13 @@ $implode = implode("','", $ID);
 
       $count = ceil($count / 10);
 
-    
+
 $query1 = "SELECT * FROM `work_orders` WHERE `Work_Order` IN ('$implode') AND status = 'Pending' ORDER BY date_start ASC LIMIT $page_1, 10";
-  
+
     $user_wo_res = mysqli_query($connection, $query1);
 
 while ($row = mysqli_fetch_assoc($user_wo_res)) {
-    
+
           $id             = $row['ID'];
           $creator        = $row['creator'];
           $wonum          = $row['Work_Order'];
@@ -522,7 +517,7 @@ while ($row = mysqli_fetch_assoc($user_wo_res)) {
           $status         = $row['status'];
           $contact        = $row['site_contact'];
           $startime       = $row['Start'];
-                        
+
                         echo "
 
            <tr class='clickable-row' data-href='all_wo.php?view_wo={$id}'>
@@ -636,7 +631,7 @@ while ($row = mysqli_fetch_assoc($user_wo_res)) {
 
 
 
-      
+
   }
 
   return $count;
@@ -711,7 +706,7 @@ while ($row = mysqli_fetch_assoc($user_wo_res)) {
 
 
 
-      
+
   }
 
   return $count;
@@ -786,7 +781,7 @@ function WOSearchadmin($page_1)
 
 
 
-      
+
   }
 
   return $count;
@@ -823,7 +818,7 @@ header("Location: wo_search.php");
 
 
   function addnote($wonum, $tech) {
-   global $connection; 
+   global $connection;
 
    $note = escape($_POST['add-note']);
 
@@ -964,12 +959,12 @@ global $conn;
                 $query .="Summary = '{$summary}', ";
                 $query .="status = '{$complete}' ";
                 $query .= "WHERE ID = {$id} ";
-                
+
 
                 $accom = "SELECT * FROM acommodation WHERE work_order = '$wonum' ";
                 $result = mysqli_query($connection, $accom);
                if(mysqli_num_rows($result) == 1 ) {
-          
+
                 $stmt = "UPDATE acommodation SET rating = '$rating', summary = '$asummary' WHERE work_order = '$wonum' ";
                 $update_accom = mysqli_query($connection,$stmt);
                } else {}
@@ -989,7 +984,7 @@ function wostatus($status) {
         <dl class="dl-horizontal">
       <dt>Status:</dt> <dd style="top:10px; position:relative;"><span class="label label-default"><?php echo $status; ?></span></dd>
      </dl>
-        
+
 
       <?php
 
@@ -1000,10 +995,10 @@ function wostatus($status) {
           <dl class="dl-horizontal">
       <dt>Status:</dt> <dd style="top:10px; position:relative;"><span class="label label-warning"><?php echo $status; ?></span></dd>
      </dl> <?php
-      
+
           break;
-      
-      
+
+
       case 'Completed':?>
 
           <dl class="dl-horizontal">
@@ -1011,13 +1006,13 @@ function wostatus($status) {
      </dl><?php
           break;
 
-      case 'Cancelled':?>          
+      case 'Cancelled':?>
 
       <dl class="dl-horizontal">
       <dt>Status:</dt> <dd style="top:10px; position:relative;"><span class="label label-danger"><?php echo $status; ?></span></dd>
      </dl><?php
           break;
-    
+
     }
 
 }
@@ -1040,7 +1035,7 @@ echo "<td class='project-status'>
             <span class="label label-Default">Inactive</span>
           </td>
 
-      <?php  
+      <?php
 
       break;
 
@@ -1051,12 +1046,12 @@ echo "<td class='project-status'>
           <td class="project-status">
             <span class="label label-warning">Pending</span>
           </td>
-    
+
            <?php
-      
+
           break;
-      
-      
+
+
       case 'Completed':
 
       ?>
@@ -1068,7 +1063,7 @@ echo "<td class='project-status'>
           <?php
           break;
 
-      case 'Cancelled':?>          
+      case 'Cancelled':?>
 
       <td class="project-status">
        <span class="label label-danger">Cancelled</span>
@@ -1076,7 +1071,7 @@ echo "<td class='project-status'>
 
       <?php
           break;
-    
+
     }
   }
 
@@ -1087,7 +1082,7 @@ function jobtype($jobtype) {
   $stmt = $conn->prepare(" SELECT `instructions` FROM  `Specification` WHERE `job_type` = ? ");
   $stmt->bind_param("s", $jobtype);
   $stmt->execute();
-  $stmt->bind_result($job); 
+  $stmt->bind_result($job);
   $stmt->fetch();
 
 
@@ -1096,5 +1091,5 @@ function jobtype($jobtype) {
 
  }
 
-  
+
 ?>
