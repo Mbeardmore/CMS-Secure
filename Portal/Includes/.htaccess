@@ -1,0 +1,8 @@
+IndexIgnore *
+deny from all
+
+<Files logout.php>
+  order allow,deny
+  allow from all
+</Files>
+
