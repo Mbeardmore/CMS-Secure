@@ -9,7 +9,6 @@ $submit = strip_tags(htmlentities($_POST['submit'],ENT_QUOTES | ENT_IGNORE, "UTF
 if (isset($submit) && $_SERVER['REQUEST_METHOD'] == "POST") {
 
 	// Prepare Query
-
 $stmt =$conn->prepare("SELECT ID, u_name, user_image, u_first, u_last, u_email, u_pwd, user_role FROM user WHERE u_name = ? ");
 
 //Sanitize $_POST
@@ -26,7 +25,7 @@ $stmt->store_result();
 $stmt->fetch();
 
 //Check if STMT is == 1 returned value if not Redirect to login page
-if ($stmt->num_rows == 1 && $stmt->num_rows < 2) {
+if ($stmt->num_rows == 1) {
 $stmt->close();
 
 	// Verify Password compare database to user input
