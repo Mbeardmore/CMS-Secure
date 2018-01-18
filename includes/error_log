@@ -1,0 +1,10 @@
+[17-Jan-2018 12:27:10 America/Chicago] PHP Parse error:  syntax error, unexpected ';' in /home1/rkcezo82/public_html/includes/login.php on line 5
+[17-Jan-2018 12:27:46 America/Chicago] PHP Warning:  include_once(/home1/rkcezo82/public_html/includes../Portal/Includes/classes.php): failed to open stream: No such file or directory in /home1/rkcezo82/public_html/includes/login.php on line 5
+[17-Jan-2018 12:27:46 America/Chicago] PHP Warning:  include_once(): Failed opening '/home1/rkcezo82/public_html/includes../Portal/Includes/classes.php' for inclusion (include_path='.:/opt/php56/lib/php') in /home1/rkcezo82/public_html/includes/login.php on line 5
+[17-Jan-2018 18:27:46 Europe/London] PHP Fatal error:  Class 'log' not found in /home1/rkcezo82/public_html/includes/login.php on line 52
+[17-Jan-2018 12:28:16 America/Chicago] PHP Warning:  include_once(/home1/rkcezo82/public_html/includes/Portal/Includes/classes.php): failed to open stream: No such file or directory in /home1/rkcezo82/public_html/includes/login.php on line 5
+[17-Jan-2018 12:28:16 America/Chicago] PHP Warning:  include_once(): Failed opening '/home1/rkcezo82/public_html/includes/Portal/Includes/classes.php' for inclusion (include_path='.:/opt/php56/lib/php') in /home1/rkcezo82/public_html/includes/login.php on line 5
+[17-Jan-2018 18:28:16 Europe/London] PHP Fatal error:  Class 'log' not found in /home1/rkcezo82/public_html/includes/login.php on line 52
+[18-Jan-2018 04:39:58 America/Chicago] PHP Parse error:  syntax error, unexpected ')' in /home1/rkcezo82/public_html/includes/login.php on line 9
+[18-Jan-2018 06:40:08 America/Chicago] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'rkcezo82_3aaa_cg'@'localhost' (using password: YES) in /home1/rkcezo82/public_html/Portal/Includes/db.php on line 13
+[18-Jan-2018 06:40:08 America/Chicago] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'rkcezo82_3aaa_cg'@'localhost' (using password: YES) in /home1/rkcezo82/public_html/Portal/Includes/db.php on line 14
