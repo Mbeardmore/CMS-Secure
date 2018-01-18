@@ -21,9 +21,7 @@ if (isset($_SERVER['HTTP_USER_AGENT'])) {
     <div class="middle-box text-center loginscreen animated fadeInDown" style="position:relative;margin-top:15%">
         <div>
             <div>
-
                 <img class="img-responsive" style=";position:relative;top:15%" src="logo.png">
-
             </div>
             <h3></h3>
             <form class="m-t" role="form" method="POST" action="includes/login.php">
@@ -38,6 +36,5 @@ if (isset($_SERVER['HTTP_USER_AGENT'])) {
             <p class="m-t"> <small></small> </p>
         </div>
     </div>
-
 </body>
 </html>
