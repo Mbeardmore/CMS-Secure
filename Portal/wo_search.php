@@ -25,7 +25,7 @@ if ($page == "" || $page == 1) {
         <?php include "Includes/sidenav.php"; ?>
 
         <?php include "Includes/topnav.php"; ?>
-        
+
         <div class="ibox">
                         <div class="ibox-title">
                             <h5>All projects assigned to this account</h5>
@@ -47,7 +47,7 @@ if ($page == "" || $page == 1) {
                                     </form>
                                 </div>
                             </div>
-                            
+
                             <div class="project-list">
 
                                 <table class="table table-hover">
@@ -58,14 +58,14 @@ if ($page == "" || $page == 1) {
                                         <td>End Date</td>
                                         <td></td>
                                         <td style="float:right;">Assigned Techs</td>
-                                     
+
                                     </th>
                                     <tbody>
-                                  <?php 
+                                  <?php
 
                                   if(isset($_POST['search'])) {
                                     $search = escape($_POST['text']);
-                                
+
                                   $post_count = "SELECT * FROM work_orders WHERE Work_Order LIKE  '%$search%' OR company LIKE '%$search%' " ;
                                   $find_count = mysqli_query($connection, $post_count);
                                   $count = mysqli_num_rows($find_count);
@@ -74,7 +74,7 @@ if ($page == "" || $page == 1) {
                                   $count = ceil($count / 10);
 
                                   confirmQuery($count);
-                                    
+
                                     $query = "SELECT * FROM work_orders WHERE Work_Order LIKE '%$search%' OR company LIKE '%$search%' ";
 
                                       $display_all = mysqli_query($connection, $query);
@@ -136,17 +136,15 @@ if ($page == "" || $page == 1) {
 
                                         WOSearchmanager($page_1);
 
-                                    } elseif (is_admin($_SESSION['u_name'])) {   
+                                    } elseif (is_admin($_SESSION['u_name'])) {
 
                                        WOSearchadmin($page_1);
 
                                 } else {
-                            
 
                                       wosearch($_SESSION['u_first'], $page_1);
                                 } }
                                      ?>
-                            
                                     </tbody>
                                 </table>
                                 <nav aria-label="Page navigation example">

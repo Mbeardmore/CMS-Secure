@@ -773,8 +773,6 @@ echo "<p class='bg-sucess'> Work order Deleted.";
 header("Location: wo_search.php");
 
 }
-
-
   function addnote($wonum, $tech) {
    global $connection;
 
@@ -811,7 +809,6 @@ function resizeImage($SrcImage,$DestImage, $MaxWidth,$MaxHeight,$Quality)
         default:
             return false;
     }
-
     // Resize Image
     if(imagecopyresampled($NewCanves, $NewImage,0, 0, 0, 0, $NewWidth, $NewHeight, $iWidth, $iHeight))
     {
