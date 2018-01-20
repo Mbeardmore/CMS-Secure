@@ -93,19 +93,23 @@ if($_POST['update']){
     <table class="table table-hover">
       <th>Job Type</th>
       <th>Job Specification</th>
-      <th style="float:left;">Modify</th>
+
       <tbody>
     <?php
      $stmt = $conn->prepare("SELECT ID,job_type, instructions FROM Specification");
      $stmt->execute();
      $stmt->bind_result($id, $job_type, $instructions);
+     $inst = mb_substr($instructions, 0,250);
+
+
      while ($stmt->fetch()) {
+       $inst = mb_substr($instructions, 0,500);
       echo "
       <tr>
             <td class='project-status'>
               {$job_type}
             </td>
-            <td> {$instructions}</td>
+            <td><h3>{$inst}</h3></td>
             <td></td>
             <td></td>
             <td class='project-actions'><a href='specifications.php?edit_spec={$id}' class='btn btn-white btn-sm'><i class='fa fa-pencil'></i>Edit</a></td>
@@ -117,5 +121,5 @@ if($_POST['update']){
   </tbody>
 </table>
   </div>
- </div>  
+ </div>
 <?php include "Includes/footer.php" ?>
