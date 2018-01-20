@@ -8,7 +8,7 @@
         <?php include "Includes/sidenav.php"; ?>
 
         <?php include "Includes/topnav.php"; ?>
-   
+
                     <div class="ibox-content" style="background-color:#f3f3f4;">
 
                     	<div class="col-lg-12">
@@ -60,7 +60,7 @@
 
                   <!-- Text input-->
                   <div class="form-group" style="position: relative;right:13px;">
-                    
+
                     <div class="col-sm-4">
                         <label for="textinput">Street</label>
                       <input type="text" placeholder="Street" name="street" class="form-control">
@@ -99,7 +99,7 @@
                  <?php usersearch(); ?>
                  </select>
                  </div>
-                <div class="form-group"">
+                <div class="form-group">
                 <label for="assigned">Site Contact</label>
                 <input type="text" class="form-control" name="site_contact">
                 </div>
@@ -116,13 +116,13 @@
                     <input type="file" name="file[]"  id="js-upload-files" multiple="multiple">
                   </div>
               </div>
-            </div>              
+            </div>
                 <div class="form-group" style="position: relative;top:30px">
                     <input class="btn btn-primary" type="submit" name="create_wo" value="create">
-                </div>  
+                </div>
             </div>
                 </div>
-                <div class="col" style="float:right;width:45%"">
+                <div class="col" style="float:right;width:45%">
                  <div class="form-group">
                 <label for="jobtype">Client</label>
                 <br>
@@ -138,7 +138,7 @@
 
                 </select>
                 </div>
-                 <div class="form-group"">
+                 <div class="form-group">
                     <label for="title">Work Order Number</label>
                     <input type="text" id="wonumber" placeholder="WO1123423" class="form-control" name="wo_number">
                     <br>
@@ -165,7 +165,7 @@
 </div>
 </div>
 </div>
- <?php 
+ <?php
 if (isset($_POST['create_wo'])) {
 createworkorder();
 }?>
