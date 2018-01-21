@@ -1,9 +1,9 @@
-<?php 
+<?php
 $session = $_SESSION['ID'];
 $query = "SELECT user_image FROM user WHERE ID = {$session}";
-$result = mysqli_query($connection, $query); 
+$result = mysqli_query($connection, $query);
 while ($row = mysqli_fetch_assoc($result))
-{   
+{
     $image     = $row['user_image'];
 }
 ?>
@@ -12,7 +12,7 @@ while ($row = mysqli_fetch_assoc($result))
     <div class="sidebar-collapse">
         <ul class="nav" id="side-menu">
             <li class="nav-header">
-                <div class="dropdown profile-element"> 
+                <div class="dropdown profile-element">
                     <span>
                     <img href="../index.php" alt="image" class="img-circle" src="Images/user_images/<?php echo $image; ?>" style="width:100px;height:100px;">
                      </span>
@@ -37,10 +37,10 @@ while ($row = mysqli_fetch_assoc($result))
                     <ul class="nav nav-second-level collapse">
                     <li>
                         <a href="help.php">Videos</a>
+                        <a href="help-section.php">Help Documents</a>
                     </li>
                 </ul>
             </li>
-
             <?php if(is_manager($_SESSION['u_name']) && $settings[Company]['View Logs'] === '1')  { ?>
             <li>
                 <a href="#"><i class="fa fa-log"></i> <span class="nav-label">Phone Logs</span><span class="fa arrow"></span></a>
@@ -49,7 +49,6 @@ while ($row = mysqli_fetch_assoc($result))
                     <li><a href="#">New Phone Log</a></li>
                 </ul>
             </li>
-
              <?php } if(is_manager($_SESSION['u_name'])) { ?>
             <li>
                 <a href=""><i class="fa fa-th-large"></i> <span class="nav-label">Databases</span> <span class="fa arrow"></span></a>
@@ -57,7 +56,7 @@ while ($row = mysqli_fetch_assoc($result))
                     <li>
                         <a href="store_info.php">Store Information Database</a>
                     </li>
-                
+
                 </ul>
             </li>
             <?php } ?>
@@ -91,7 +90,7 @@ while ($row = mysqli_fetch_assoc($result))
                          <li><a href="calender.php">Technician Calender</a></li>
                    <?php } ?>
                         <li><a href="booking.php">Book Holiday</a></li>
-                    
+
 
                 </ul>
             </li>
@@ -101,24 +100,22 @@ while ($row = mysqli_fetch_assoc($result))
                 <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Users</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="register.php">Create User</a></li>
-                    <?php } else {} 
+                    <?php } else {}
                     if(is_manager($_SESSION['u_name'])) {?>
                     <li><a href="manage_user.php">Manage Users</a></li>
                     <?php } else {} ?>
                 </ul>
             </li>
-            <?php 
+            <?php
             if (is_manager($_SESSION['u_name']) && $settings[Company]['View Settings'] == '1') { ?>
             <li>
                 <a href="settings.php"><i class="fa fa-wrench"></i> <span class="nav-label">Settings</span></a>
             </li>
             <?php } ?>
-             
-            
+
+
         </ul>
 
     </div>
 </nav>
 </div>
-
-

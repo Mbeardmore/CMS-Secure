@@ -15,7 +15,7 @@ $user = $_SESSION['u_first'];
 $query1 = "SELECT * FROM assigned WHERE u_first = '$user' ";
 $numrows = mysqli_query($connection, $query1);
 $count = mysqli_num_rows($numrows);
- ?>
+?>
 <div class="page-wrapper">
  <div class="row m-b-lg m-t-lg">
                 <div class="col-md-6">

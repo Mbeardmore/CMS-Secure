@@ -1,4 +1,4 @@
-<?php 
+<?php
 include "Includes/header.php";
 if (is_admin($_SESSION['u_name'])) {
 
@@ -59,12 +59,12 @@ $woID = escape($_GET['edit_wo']);
         <!-- /.panel-heading -->
         <div class="panel-body">
                 <form method="POST" enctype="multipart/form-data">
-            
-             
+
+
                 <br>
                  <div class="form-group" style="float:left;width:45%;">
                  <fieldset>
-                  
+
                   <div class="form-group">
                     <label for="textinput" style="">Company</label>
                       <input type="text" style="max-width:60%" name="company" value="<?php echo $company; ?>" placeholder="Apple" class="form-control">
@@ -72,7 +72,7 @@ $woID = escape($_GET['edit_wo']);
 
                   <!-- Text input-->
                   <div class="form-group" style="position: relative;right:13px;">
-                    
+
                     <div class="col-sm-4">
                         <label for="textinput">Street</label>
                       <input type="text" placeholder="Street" name="street" value="<?php echo $street; ?>" class="form-control">
@@ -121,7 +121,7 @@ $woID = escape($_GET['edit_wo']);
                 <input type="text" class="form-control" value="<?php echo $contact; ?>" name="site_contact">
                 </div>
                 <br>
-                <div class="form-group" style="display:inline-grid;position:relative;left:1%;width:15%"">
+                <div class="form-group" style="display:inline-grid;position:relative;left:1%;width:15%">
                 <label for="assigned">Start Time</label>
                 <input type="text" class="form-control" value="<?php echo $start; ?>" name="start_time">
                 </div>
@@ -164,7 +164,7 @@ $woID = escape($_GET['edit_wo']);
 
             <?php if(isset($_POST['update_wo'])) {
 
-              
+
 
                 $creator = $_SESSION['u_first'];
                 $company = escape($_POST['company']);
@@ -184,7 +184,7 @@ $woID = escape($_GET['edit_wo']);
                 $combined = $wonumber . " " . $company . " " . $assigned;
 
                   if(!empty($_POST['wo_number'])) {
-                    
+
                     if(!is_dir($path)) {
 
                           mkdir($path);
@@ -252,7 +252,7 @@ $woID = escape($_GET['edit_wo']);
 
                   $explode= explode(",", $assigned);
                   foreach ($explode as $user) {
- 
+
                     $stmt =$conn->prepare("INSERT INTO assigned (wo_num, u_first) VALUES (?, ?) ");
                     $stmt->bind_param("ss", $wonumber, $user);
                     $stmt->execute();
@@ -269,7 +269,7 @@ $woID = escape($_GET['edit_wo']);
                   $query4 = "UPDATE wo_notes SET wo_num = '{$wonumber}' WHERE wo_num = '{$wonum}' ";
                   $query5 = "UPDATE job_messages SET Work_Order = '{$wonumber}' WHERE Work_Order = '{$wonum}' ";
                   $query6 = "UPDATE assigned SET wo_number = '{$wonumber}' WHERE wo_number '{$wonum}' ";
-                  
+
                   $stmt = $conn->prepare("UPDATE events SET title = ? WHERE work_order = ? ");
                   $stmt->bind_param("ss", $combined, $wonum);
                   $stmt->execute();

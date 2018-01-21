@@ -1,8 +1,7 @@
 <?php include "Includes/header.php"; ?>
-
 <body>
     <div id="wrapper">
-        <?php 
+        <?php
         include "Includes/sidenav.php";
         include "Includes/topnav.php";
          ?>
@@ -22,19 +21,15 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <?php 
-
+                    <?php
                     viewallusers();
-
                     if (isset($_GET['delete_user'])) {
                     deleteuser();
                     }
                      ?>
                         </div>
-
                     </div>
                 </div>
-
     <?php include "Includes/footer.php"; ?>
     <!-- Page-Level Scripts -->
     <script>
@@ -66,7 +61,5 @@
         });
 
     </script>
-
 </body>
-
 </html>

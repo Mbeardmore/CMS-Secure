@@ -8,7 +8,6 @@ $wonum = "Settings";
 $test = new log();
 $test->logaction($log, $wonum, $user);
 //after the form submit
-
 if($_POST['update']){
   $filepath = "Includes/company_config.ini";
   $data = $_POST;
@@ -20,7 +19,6 @@ if($_POST['update']){
     $content = "";
     //parse the ini file to get the sections
     //parse the ini file using default parse_ini_file() PHP function
-
     foreach($data as $section=>$values){
       //append the section
       $content .= "[".$section."]\n";
@@ -93,27 +91,24 @@ if($_POST['update']){
     <table class="table table-hover">
       <th>Job Type</th>
       <th>Job Specification</th>
-
       <tbody>
     <?php
      $stmt = $conn->prepare("SELECT ID,job_type, instructions FROM Specification");
      $stmt->execute();
      $stmt->bind_result($id, $job_type, $instructions);
      $inst = mb_substr($instructions, 0,250);
-
-
      while ($stmt->fetch()) {
        $inst = mb_substr($instructions, 0,500);
       echo "
       <tr>
-            <td class='project-status'>
-              {$job_type}
-            </td>
-            <td><h3>{$inst}</h3></td>
-            <td></td>
-            <td></td>
-            <td class='project-actions'><a href='specifications.php?edit_spec={$id}' class='btn btn-white btn-sm'><i class='fa fa-pencil'></i>Edit</a></td>
-        </tr>
+          <td class='project-status'>
+            {$job_type}
+          </td>
+          <td><h3>{$inst}</h3></td>
+          <td></td>
+          <td></td>
+          <td class='project-actions'><a href='specifications.php?edit_spec={$id}' class='btn btn-white btn-sm'><i class='fa fa-pencil'></i>Edit</a></td>
+      </tr>
       ";
      }
      $stmt->close();

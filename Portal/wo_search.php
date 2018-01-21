@@ -1,31 +1,25 @@
 <?php include "Includes/header.php";
-
 if(isset($_GET['page'])) {
-
 $page = $_GET['page'];
-
-} else {
-
- $page = "";
-
 }
-
-if ($page == "" || $page == 1) {
-
+else
+{
+ $page = "";
+}
+if ($page == "" || $page == 1)
+{
     $page_1 = 0;
-} else {
-
+}
+else
+{
     $page_1 = ($page * 10) - 10;
 }
-
  ?>
 <body>
-
     <div id="wrapper">
-        <?php include "Includes/sidenav.php"; ?>
-
-        <?php include "Includes/topnav.php"; ?>
-
+        <?php
+         include "Includes/sidenav.php";
+         include "Includes/topnav.php"; ?>
         <div class="ibox">
                         <div class="ibox-title">
                             <h5>All projects assigned to this account</h5>
@@ -69,19 +63,11 @@ if ($page == "" || $page == 1) {
                                   $post_count = "SELECT * FROM work_orders WHERE Work_Order LIKE  '%$search%' OR company LIKE '%$search%' " ;
                                   $find_count = mysqli_query($connection, $post_count);
                                   $count = mysqli_num_rows($find_count);
-
-
                                   $count = ceil($count / 10);
-
                                   confirmQuery($count);
-
                                     $query = "SELECT * FROM work_orders WHERE Work_Order LIKE '%$search%' OR company LIKE '%$search%' ";
-
                                       $display_all = mysqli_query($connection, $query);
-
                                      confirmQuery($display_all);
-
-
                                       while ($row = mysqli_fetch_assoc($display_all)) {
                                           $id             = $row['ID'];
                                           $creator        = $row['creator'];
@@ -98,7 +84,6 @@ if ($page == "" || $page == 1) {
                                           $contact        = $row['site_contact'];
 
                                             echo "
-
                                            <tr class='clickable-row' data-href='view_wo.php?view_wo={$id}'>
                                               <td class='project-status'>";
                                                  wosearchstatus($status, $dateend);

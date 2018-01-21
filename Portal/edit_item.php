@@ -88,16 +88,10 @@ $row = mysqli_fetch_assoc($select_item);
           <input value="<?php  echo htmlspecialchars(stripslashes($lastpurchase));
    ?>"  type="text" class="form-control" name="purchase_date">
       </div>
-
-
       <div class="form-group">
          <label for="post_content">Post Content</label>
-         <textarea  class="form-control "name="post_content" id="" cols="30" rows="10">
-
-
-         </textarea>
+         <textarea  class="form-control "name="post_content" id="" cols="30" rows="10"></textarea>
       </div>
-
        <div class="form-group">
           <input class="btn btn-primary" type="submit" name="update_item" value="Update Post" id="update">
       </div>
@@ -130,7 +124,7 @@ $row = mysqli_fetch_assoc($select_item);
 
         echo "<p class='bg-success'>Post Updated. <a href='../post.php?p_id={$name}'>View Post </a> or <a href='item_search.php'>Edit More Posts</a></p>";
 
-        header("Location:item_search.php");    
+        header("Location:item_search.php");
     }
 
   } else {

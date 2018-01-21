@@ -3,19 +3,16 @@ include "Includes/header.php";
 include "Includes/sidenav.php";
 include "Includes/topnav.php";
 if (isset($_GET['new_video']) && is_manager($_SESSION['u_name'])) {
-
 if (isset($_POST['Add_Video'])) {
-
   $title = $_POST['title'];
   $link  = $_POST['youtube'];
   $desc  = $_POst['vid_desc'];
   $date  = date("d/m/y");
   $upload= $_SESSION['u_first'];
-
-$vid = $conn->prepare("INSERT INTO media (title, link, description, `date`, uploader) VALUES (?,?,?,?,?) ");
-$vid->bind_param("sssss", $title, $link, $desc, $date, $upload);
-$vid->execute();
-$vid->close();
+  $vid = $conn->prepare("INSERT INTO media (title, link, description, `date`, uploader) VALUES (?,?,?,?,?) ");
+  $vid->bind_param("sssss", $title, $link, $desc, $date, $upload);
+  $vid->execute();
+  $vid->close();
 if(!$vid->execute()) echo $vid->error;
 header("Location: help.php");
 }  ?>
@@ -35,11 +32,28 @@ header("Location: help.php");
     </div>
   </form>
 </div>
-<?php } else {
-  if (is_manager($_SESSION['u_name'])) { echo "<a href='help.php?new_video' class='btn btn-primary' style='float:right;margin-top:1%;''> Add new Video</a>";}?>
-  <div class="wrapper">
+<?php } else { ?>
+  <div class="row wrapper border-bottom white-bg page-heading">
+      <div class="col-sm-4">
+          <h2>Video Section</h2>
+          <ol class="breadcrumb">
+              <li>
+                  <a href="index.php">Homepage</a>
+              </li>
+              <li class="active">
+                  <strong>Video Section</strong>
+              </li>
+          </ol>
+      </div>
+      <div class="col-sm-8">
+          <div class="title-action">
+            <?php if (is_manager($_SESSION['u_name'])) { echo "<a href='help.php?new_video' class='btn btn-primary'>New Video</a>";} ?>
+          </div>
+      </div>
+  </div>
+  <div class="wrapper" style="margin-top:3%;">
     <div class="container-fluid" style="margin:3% auto;border: 3px dotted #e5e5e5;">
-        <div class="row" style="padding-top:3%">
+        <div class="row" style="padding-top:1.5%; padding-bottom:1.5%;">
           <?php
             $stmt = $conn->prepare("SELECT ID, title, link, description, `date`,  uploader FROM media ");
             $stmt->execute();
@@ -49,16 +63,18 @@ header("Location: help.php");
               echo "
               <div class='col-sm-4'>
                 <div class='card' style='width:auto'>
+                <h3 class='card-title'>{$title}</h3>
                   <div class='embed-responsive embed-responsive-16by9'>
                       <iframe class='embed-responsive-item' src='{$link}'></iframe>
                   </div>
                   <div class='card-block'>
-                    <h4 class='card-title'>{$title}</h4>
-                  </div>
                 </div>
-              </div>";
+              </div>
+            </div>";
             }
-          }?>
+          }
+      ?>
+
         </div>
     </div>
   </div>
