@@ -17,6 +17,3 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
     <!-- Copyright © 2016-2017 Martin Inc. All Rights Reserved. -->
-
-
-    

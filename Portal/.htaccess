@@ -1,4 +1,4 @@
-IndexIgnore *
+IndexIgnore 
 RewriteEngine On
 ## EXPIRES CACHING ##
 <IfModule mod_expires.c>

@@ -1,10 +1,8 @@
 <?php include "Includes/header.php"; ?>
-
 <body>
     <div id="wrapper">
         <?php include "Includes/sidenav.php"; ?>
         <?php include "Includes/topnav.php"; ?>
-
                     <div class="ibox-content" style="background-color: #f3f3f4">
                         <div class="col-lg-12">
                     <h1 class="page-header">Add User</h1>

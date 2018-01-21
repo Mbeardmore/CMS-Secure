@@ -13,13 +13,10 @@ $stmt->close();
 <body>
 
     <div id="wrapper">
-        <?php include "Includes/sidenav.php"; ?>
-
-        <?php include "Includes/topnav.php"; ?>
+        <?php include "Includes/sidenav.php";
+              include "Includes/topnav.php"; ?>
 
                     <div class="ibox-content">
-
-
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Edit Store</h1>

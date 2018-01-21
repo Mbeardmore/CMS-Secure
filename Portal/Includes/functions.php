@@ -1037,11 +1037,31 @@ function jobtype($jobtype) {
   $stmt->execute();
   $stmt->bind_result($job);
   $stmt->fetch();
-
-
+  $stmt->close();
   echo $job;
+ }
 
 
+ function QandA($category) {
+   global $conn;
+   $stmt = $conn->prepare("SELECT category, link, description FROM faq WHERE category = ? ");
+   $stmt->bind_param("s", $category);
+   $stmt->execute();
+   $stmt->bind_result($cat, $link, $description);
+   while ($stmt->fetch()) {
+     echo "
+     <div class='faq-answer' style='display:-webkit-inline-box;width:100%'>
+       <a href='Files/PDF/$link' download>
+       <img src='http://icons.iconarchive.com/icons/graphicloads/filetype/256/pdf-icon.png' alt='' class='img-circle' style='width:50px;height:50px;''>
+     </a>
+     <div>
+       <p style='padding-left:5px'>$description</p>
+       <div>
+     </div>
+     <br>
+     ";
+   }
+ $stmt->close();
  }
 
 
