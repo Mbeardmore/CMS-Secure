@@ -356,7 +356,7 @@ echo "<p class='bg-sucess'> user Deleted.";
       $WOlink = escape($_POST['link']);
       $datetoday = date('d/m/Y');
       $assignedtech = implode(",", $assigned);
-      $combined = $wonumber . " " . $joblocation . " " . $assignedtech;
+      $combined = $wonumber . " " . $joblocation . " " .$city. " " . $assignedtech;
       $color = "#008000";
       $exploded = explode(",", $assignedtech);
 
@@ -503,7 +503,7 @@ while ($row = mysqli_fetch_assoc($user_wo_res)) {
 
                         echo "
 
-           <tr class='clickable-row' data-href='all_wo.php?view_wo={$id}'>
+           <tr class='clickable-row' data-href='view_wo.php?view_wo={$id}'>
               <td class='project-status'>";
                  wosearchstatus($status, $dateend);
                  echo "

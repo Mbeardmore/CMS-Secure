@@ -22,9 +22,6 @@ $events = $req->fetchAll();
 
                 <div id="calendar" class="col-centered">
                 </div>
-
-
-
         <!-- /.row -->
 
         <!-- Modal -->
@@ -189,7 +186,6 @@ $events = $req->fetchAll();
             },
             eventResize: function(event,dayDelta,minuteDelta,revertFunc) {
                 edit(event);
-
             },
             events: [
             <?php foreach($events as $event):
