@@ -1,0 +1,5 @@
+[22-Jan-2018 16:13:41 Europe/London] PHP Warning:  mkdir(): File exists in /home1/rkcezo82/public_html/Portal/Includes/functions.php on line 368
+[23-Jan-2018 11:45:49 Europe/London] PHP Warning:  mkdir(): File exists in /home1/rkcezo82/public_html/Portal/Includes/functions.php on line 368
+[24-Jan-2018 09:26:15 America/Chicago] PHP Parse error:  syntax error, unexpected '$stmt' (T_VARIABLE) in /home1/rkcezo82/public_html/Portal/booking.php on line 88
+[24-Jan-2018 15:26:29 Europe/London] PHP Fatal error:  Call to a member function bind_param() on boolean in /home1/rkcezo82/public_html/Portal/booking.php on line 89
+[24-Jan-2018 09:26:51 America/Chicago] PHP Parse error:  syntax error, unexpected '$stmt' (T_VARIABLE) in /home1/rkcezo82/public_html/Portal/booking.php on line 88

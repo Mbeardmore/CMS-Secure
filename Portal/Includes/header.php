@@ -28,6 +28,7 @@ include "classes.php";
     <link href="../css/plugins/blueimp/css/blueimp-gallery.css" rel="stylesheet">
     <link href="../css/plugins/blueimp/css/blueimp-gallery-indicator.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="../css/jquery.steps.css">
     <script src="../js/plugins/steps/jquery.steps.min.js"></script>
     <script src="../js/numeric-1.2.6.min.js"></script>
 </head>

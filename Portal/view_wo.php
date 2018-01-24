@@ -9,7 +9,7 @@ include_once "Includes/header.php";
         ?>
                     <div class="ibox-content" style="background-color:#f3f3f4;">
                         <?php
-                      if (is_tech($_SESSION['u_name'])) {
+          if (is_tech($_SESSION['u_name'])) {
           $tech = $_SESSION['u_first'];
 
           $woID = escape($_GET['view_wo']);
@@ -50,12 +50,8 @@ include_once "Includes/header.php";
           $test = new log();
           $test->logaction($log, $wonum, $user );
 
-
           $date = date("d-m-Y");
-
           ?>
-
-       <link rel="stylesheet" href="../css/jquery.steps.css">
           <div id="wrapper">
         <div class="row">
             <div class="col-lg-9">
@@ -144,9 +140,7 @@ include_once "Includes/header.php";
                                             $name    = $ret['u_name'];
                                             $sent    = $ret['time_added'];
 
-
                                           ?>
-
                                             <div class="feed-element"
                                             <a href="#" class="pull-left">
                                                <!--  <img alt="image" class="img-circle" src="img/a7.jpg"> -->
@@ -160,9 +154,7 @@ include_once "Includes/header.php";
                                                 </div>
                                             </div>
                                         </div>
-
                                           <?php } ?>
-
                                     </div>
                                             <form method="POST">
                                               <input type="text" name="u_message" class="form-control">
@@ -302,7 +294,6 @@ include_once "Includes/header.php";
                                     <p><?php echo $special; ?></p>
                                   </div>
                                 </div>
-
                                 </div>
                                 </div>
 
@@ -319,223 +310,6 @@ include_once "Includes/header.php";
                                  </div>
                                  <?php } ?>
                                  <div style="" class="tab-pane" id="tab-6">
-
-                                  <?php
-                                   switch ($jobtype) {
-
-                                      case 'Apple_Strip_FOH_Ardex':
-
-                                      if(isset($_POST['Consumables'])) {
-
-                                              $cleanse = escape($_POST['cleanse']);
-                                              $PUSealer = escape($_POST['DrSchutz-PU']);
-                                              $MPC = escape($_POST['Orange-MPC']);
-                                              $StoneSoap = escape($_POST['Stone-Soap']);
-                                              $Sustain = escape($_POST['Sustain']);
-
-
-                                              $stmt = $conn->prepare("INSERT INTO `used_items` (`date`, wo_id, cleanse, PUsealer, `Orange-MPC`, `Stone-Soap`, Sustain) VALUES (?,?,?,?,?,?,?) ");
-                                              $stmt->bind_param("ssiiiii", $date, $wonum, $cleanse, $PUSealer, $MPC, $StoneSoap, $Sustain);
-                                              $stmt->execute();
-                                              $stmt->close();
-                                              header("Location: view_wo.php?view_wo={$id}");
-                                            }
-
-                                             echo '
-                                            <form method="post">
-                                              <dl class="dl-horizontal">
-                                              <dt>Cleanse<dt><dd><input type="text" name="cleanse" class="form-control" style="width:auto;" required><dd>
-                                              <br>
-                                              <dt>Dr Schutz PU Sealer<dt><dd><input type="text" name="DrSchutz-PU" class="form-control" style="width:auto;"><dd>
-                                              <br>
-                                              <dt>Orange MPC<dt><dd><input type="text" name="Orange-MPC" class="form-control" style="width:auto;"><dd>
-                                              <br>
-                                              <dt>Stone Soap<dt><dd><input type="text" name="Stone-Soap" class="form-control" style="width:auto;"><dd>
-                                              <br>
-                                              <dt>Sustain<dt><dd><input type="text" name="Sustain" class="form-control" style="width:auto;"><dd>
-                                              <br>
-                                              <input class="btn btn-primary" type="submit" name="Consumables" value="submit">
-                                            </form>';
-
-                                      break;
-
-                                      case 'Apple_Strip_FOH_NoArdex':
-                                             if(isset($_POST['Consumables'])) {
-
-                                              $cleanse = escape($_POST['cleanse']);
-                                              $Defence = escape($_POST['Defence']);
-                                              $PUSealer = escape($_POST['DrSchutz']);
-                                              $MPC = escape($_POST['Orange-MPC']);
-                                              $StoneSoap = escape($_POST['Stone-Soap']);
-                                              $sustain  = escape($_POST['Sustain']);
-
-
-                                              $stmt = $conn->prepare("INSERT INTO `used_items` (`date`, wo_id, cleanse, defence, PUsealer, `Orange-MPC`, `Stone-Soap`, Sustain) VALUES (?,?,?,?,?,?,?,?) ");
-                                              $stmt->bind_param("siiiiiii", $date, $wonum, $cleanse, $Defence, $PUSealer, $MPC, $StoneSoap, $sustain);
-                                              $stmt->execute();
-                                              $stmt->close();
-                                              header("Location: view_wo.php?view_wo={$id}");
-                                            }
-
-
-                                      echo '
-                                        <form method="post">
-                                          <dl class="dl-horizontal">
-                                          <dt>Cleanse<dt><dd><input type="text" name="cleanse" class="form-control" style="width:auto;" required><dd>
-                                          <br>
-                                          <dt>Defence<dt><dd><input type="text" name="Defence" class="form-control" style="width:auto;"><dd>
-                                          <br>
-                                          <dt>Turbo Strip 10L<dt><dd><input type="text" name="Turbo-Strip" class="form-control" style="width:auto;"><dd>
-                                          <br>
-                                          <dt>Dr Schutz PU Sealer<dt><dd><input type="text" name="DrSchutz" class="form-control" style="width:auto;"><dd>
-                                          <br>
-                                          <dt>Orange MPC<dt><dd><input type="text" name="Orange-MPC" class="form-control" style="width:auto;"><dd>
-                                          <br>
-                                          <dt>Stone Soap<dt><dd><input type="text" name="Stone-Soap" class="form-control" style="width:auto;"><dd>
-                                          <br>
-                                          <dt>Sustain<dt><dd><input type="text" name="Sustain" class="form-control" style="width:auto;"><dd>
-                                          <br>
-                                          <input class="btn btn-primary" type="submit" name="Consumables" value="submit">
-                                        </form>';
-
-
-
-                                      break;
-
-                                      case 'Apple_Strip_FOH_Terrazzo':
-
-                                       if(isset($_POST['Consumables'])) {
-
-                                              $cleanse = escape($_POST['cleanse']);
-                                              $Secura = escape($_POST['Secura']);
-                                              $MPC = escape($_POST['Orange-MPC']);
-                                              $StoneSoap = escape($_POST['Stone-Soap']);
-                                              $Sustain = escape($_POST['Sustain']);
-
-
-                                              $stmt = $conn->prepare("INSERT INTO `used_items` (`date`, wo_id, cleanse, `Orange-MPC`, `Stone-Soap`, Sustain, Secura) VALUES (?,?,?,?,?,?,?) ");
-                                              $stmt->bind_param("ssiiiii", $date, $wonum, $cleanse, $MPC, $StoneSoap, $Sustain, $Secura);
-                                              $stmt->execute();
-                                              $stmt->close();
-                                              header("Location: view_wo.php?view_wo={$id}");
-                                            }
-
-                                       echo '
-                                             <form method="post">
-                                          <dl class="dl-horizontal">
-                                          <dt>Cleanse<dt><dd><input type="text" name="cleanse" class="form-control" style="width:auto;" required><dd>
-                                          <br>
-                                          <dt>Dr Schutz Secura<dt><dd><input type="text" name="Secura" class="form-control" style="width:auto;"><dd>
-                                          <br>
-                                          <dt>Orange MPC<dt><dd><input type="text" name="Orange-MPC" class="form-control" style="width:auto;"><dd>
-                                          <br>
-                                          <dt>Stone Soap<dt><dd><input type="text" name="Stone-Soap" class="form-control" style="width:auto;"><dd>
-                                          <br>
-                                          <dt>Sustain<dt><dd><input type="text" name="Sustain" class="form-control" style="width:auto;"><dd>
-                                          <br>
-                                          <input class="btn btn-primary" type="submit" name="Consumables" value="submit">
-                                          </form>';
-
-
-                                      break;
-
-                                      case 'Apple_ardex_removal':
-
-
-
-                                      break;
-
-                                      case 'Apple_hone':
-
-                                      break;
-
-                                      case 'Apple_strip_BOH':
-
-                                       if(isset($_POST['Consumables'])) {
-
-                                              $TurboStrip = escape($_POST['TurboStrip']);
-                                              $Secura = escape($_POST['Secura']);
-                                              $Fort2 = escape($_POST['Forte2']);
-                                              $Isi2 = escape($_POST['Isi2']);
-
-
-                                              $stmt = $conn->prepare("INSERT INTO `used_items` (`date`, wo_id, turbostrip, Secura, `EcoLab-Forte2`, `EcoLab-Isi2`) VALUES (?,?,?,?,?,?) ");
-                                              $stmt->bind_param("ssiiii", $date, $wonum, $TurboStrip, $Secura, $Fort2, $Isi2);
-                                              $stmt->execute();
-                                              $stmt->close();
-                                              header("Location: view_wo.php?view_wo={$id}");
-                                            }
-
-
-                                        echo '
-                                             <form method="post">
-                                          <dl class="dl-horizontal">
-                                          <dt>Dr Schutz Turbo Strip<dt><dd><input type="text" name="TurboStrip" class="form-control" style="width:auto;" required><dd>
-                                          <br>
-                                          <dt>Dr Schutz Secura<dt><dd><input type="text" name="Secura" class="form-control" style="width:auto;"><dd>
-                                          <br>
-                                          <dt>EcoLab Maxx Forte2<dt><dd><input type="text" name="Forte2" class="form-control" style="width:auto;"><dd>
-                                          <br>
-                                          <dt>EcoLab Maxx Isi2<dt><dd><input type="text" name="Isi2" class="form-control" style="width:auto;"><dd>
-                                          <br>
-                                          <input class="btn btn-primary" type="submit" name="Consumables" value="submit">
-                                          </form>';
-
-
-                                      break;
-
-                                      case 'wood_floor_rest':
-
-                                      if(isset($_POST['Consumables'])) {
-
-                                        $primer   = $_POST['Primer'];
-                                        $lacquer  = $_POST['Lacquer'];
-                                        $Fill101  = $_POST['Fill-101'];
-                                        $Fill     = $_POST['Fill-H99A'];
-                                        $coloroil = $_POST['Colour-Oil'];
-                                        $oil1fs   = $_POST['Oil-1FS'];
-                                        $waxoil   = $_POST['Wax-Oil'];
-                                        $stain    = $_POST['Stain'];
-
-                                        $stmt = $conn->prepare("INSERT INTO `used_items` (`date`, wo_id, Primer, Lacquer, `Fill-101`, `Fill-H99A`, `Colour-Oil`, `Oil-1FS`, `Wax-Oil`, Stain) VALUES (?,?,?,?,?,?,?,?,?,?) ");
-                                        $stmt->bind_param("ssiiiiiiii", $date,  $wonum, $primer, $lacquer, $Fill101, $Fill, $coloroil, $oil1fs, $waxoil, $stain);
-                                        $stmt->execute();
-                                        $stmt->close();
-                                      }
-
-
-                                         echo '
-                                             <form method="post">
-                                          <dl class="dl-horizontal">
-                                          <dt>Primer 5L<dt><dd><input type="text" name="Primer" class="form-control" style="width:auto;" required><dd>
-                                          <br>
-                                          <dt>Lacquer<dt><dd><input type="text" name="Lacquer" class="form-control" style="width:auto;"><dd>
-                                          <br>
-                                          <dt>Fill 101<dt><dd><input type="text" name="Fill-101" class="form-control" style="width:auto;"><dd>
-                                          <br>
-                                          <dt>Fill H99A<dt><dd><input type="text" name="Fill-H99A" class="form-control" style="width:auto;"><dd>
-                                          <br>
-                                          <dt>Colour Oil<dt><dd><input type="text" name="Colour-Oil" class="form-control" style="width:auto;"><dd>
-                                          <br>
-                                          <dt>Oil 1FS<dt><dd><input type="text" name="Oil-1FS" class="form-control" style="width:auto;"><dd>
-                                          <br>
-                                          <dt>Wax Oil<dt><dd><input type="text" name="Wax-Oil" class="form-control" style="width:auto;"><dd>
-                                          <br>
-                                          <dt>Stain <dt><dd><input type="text" name="Stain" class="form-control" style="width:auto;"><dd>
-                                          <br>
-                                          <input class="btn btn-primary" type="submit" name="Consumables" value="submit">
-                                          </form>';
-
-
-                                      break;
-
-                                      case 'carpet_clean':
-
-                                      break;
-
-                                    }
-                                  ?>
-
                                     <dl>
                                  </div>
                                  <div class="tab-pane" id="tab-7">
@@ -558,7 +332,6 @@ include_once "Includes/header.php";
                                 <?php
 
                                if ($status === 'Completed') {
-
 
                                 } else {
 
@@ -599,8 +372,6 @@ include_once "Includes/header.php";
                     <hr>
                     <h5>Project files</h5>
                     <ul class="list-unstyled project-files">
-
-
                        <?php
 
                        $dir = "work_order_files/$wonum.$company/";
@@ -619,7 +390,6 @@ include_once "Includes/header.php";
                     </ul>
                 </div>
             </div>
-
 <!-- Modal Image -->
               <div id="mymodal" class="modal">
   <!-- Modal content -->
@@ -628,11 +398,8 @@ include_once "Includes/header.php";
                 <div class="ibox-content" id="ibox">
 
                   <?php
-
                     $images = "SELECT * FROM work_order_images WHERE wo_number = '$wonum' ";
-
                     $result = mysqli_query($connection, $images);
-
                     while($row = mysqli_fetch_assoc($result)) {
 
                       $imageloc = $row['Location'];
@@ -687,8 +454,6 @@ include_once "Includes/header.php";
                      <label for="title">Client Signature</label>
                         <input  type="text" class="form-control" name="Client" required="">
                 </div>
-
-
                 <label for="rating">Satisfaction Rating</label>
                 <div name="rating" required="">
                 <label class="radio-inline"><input type="radio" value="1" name="optradio">1</label>
@@ -709,7 +474,6 @@ include_once "Includes/header.php";
                       • Problems that occurred i.e. Stains that couldn’t be removed<br>
                       • Brief summary of results<br>
                       • Any info to be passed to client<br>
-
                     </p>
                     </section>
                     <?php $accom = "SELECT * FROM acommodation WHERE work_order = '$wonum'";
@@ -744,65 +508,46 @@ include_once "Includes/header.php";
               completewo($wonum, $id);
              }
               ?>
-
           </div>
           </div>
           </div>
-
-
 <?php  include "Includes/footer.php"; ?>
-
-          <script>
+<script>
 // Get the modal
 var modal = document.getElementById('mymodal');
-
 // Get the button that opens the modal
 var btn = document.getElementById("myBtn");
-
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
-
 // When the user clicks on the button, open the modal
 btn.onclick = function() {
     modal.style.display = "block";
 }
-
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
     modal.style.display = "none";
 }
-
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
     }
 }
-
 </script>
-
-          <script type="text/javascript">
-            var objDiv = document.getElementById("message");
-objDiv.scrollTop = objDiv.scrollHeight;
-          </script>
-
-
-          <script type="text/javascript">
-
-
-          $(document).ready(function () {
-
-          $("#modal").click(function(){
-          $('#myModal').modal('show');
-          });
-          $("#btnSubmit").click(function(){
-          $('#mymodal2').modal('show');
-          });
-          });
-          </script>
-
-
 <script type="text/javascript">
+
+      var objDiv = document.getElementById("message");
+      objDiv.scrollTop = objDiv.scrollHeight;
+
+  $(document).ready(function () {
+  $("#modal").click(function(){
+  $('#myModal').modal('show');
+  });
+  $("#btnSubmit").click(function(){
+  $('#mymodal2').modal('show');
+  });
+  });
+
  $("#example-basic").steps({
     headerTag: "h3",
     bodyTag: "section",
