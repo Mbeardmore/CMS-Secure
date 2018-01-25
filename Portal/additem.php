@@ -5,7 +5,6 @@
         <?php include "Includes/sidenav.php"; ?>
         <?php include "Includes/topnav.php"; ?>
                   <div class="ibox-content">
-
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Add Items</h1>
@@ -55,22 +54,17 @@
          <label for="title">Date Of Last Purchase</label>
           <input   type="text" class="form-control" name="purchase_date">
       </div>
-
        <div class="form-group">
           <input class="btn btn-primary" type="submit" name="create_item" value="Create Item">
       </div>
-
-
 </form>
 <?php
 if (isset($_POST['create_item'])) {
   createitem();
 }
  } else {
-
  header ("Location: ../index.html");
-
 }
 ?>
- </div> 
+ </div>
  <?php include "Includes/footer.php" ?>
