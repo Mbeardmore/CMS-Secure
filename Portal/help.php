@@ -2,7 +2,7 @@
 include "Includes/header.php";
 include "Includes/sidenav.php";
 include "Includes/topnav.php";
-if (isset($_GET['new_video']) && is_manager($_SESSION['u_name'])) {
+if (isset($_GET['new_video']) || isset($_GET['edit_video'])  && is_manager($_SESSION['u_name'])) {
 if (isset($_POST['Add_Video'])) {
   $title = $_POST['title'];
   $link  = $_POST['youtube'];
@@ -15,24 +15,49 @@ if (isset($_POST['Add_Video'])) {
   $vid->close();
 if(!$vid->execute()) echo $vid->error;
 header("Location: help.php");
-}  ?>
-  <div class="panel-body" id="formbody">
-<form action="" method="post" enctype="multipart/form-data">
-  <div class="form-group">
-    <label for="title">Title</label>
-    <input value=""  type="text" class="form-control" name="title" style="Width:40%">
+}
+if(isset($_GET['edit_video'])) {
+$ID = $_GET['edit_video'];
+$stmt = $conn->prepare("SELECT title, link FROM media WHERE ID = {$ID} ");
+$stmt->execute();
+$stmt->bind_result($T,$L);
+$stmt->fetch();
+$stmt->close();
+}
+if (isset($_POST['Edit_Video'])) {
+ $newtitle = $_POST['title'];
+ $newlink = $_POST['youtube'];
+$stmt = $conn->prepare("UPDATE media SET title = ?, link = ? WHERE ID = ?");
+$stmt->bind_param("ssi",$newtitle, $newlink, $ID);
+$stmt->execute();
+$stmt->close();
+header("Location: help.php?edit_video=$ID");
+}
+?>
+<div class="panel-body" id="formbody">
+  <form action="" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <br>
+      <?php echo $link;
+      echo $Title; ?>
+      <input  type="text" class="form-control" value="<?php echo $T; ?>" name="title" style="Width:40%">
     </div>
     <div class="form-group">
-    <label for="title">Youtube Link</label>
-    <input value=""  type="text" class="form-control" name="youtube" placeholder="www.youtube.com/watch?v=G1ueDkb_S6Q"style="width:40%" required>
+      <label for="title">Youtube Link</label>
+      <input type="text" class="form-control" name="youtube"  value="<?php echo $L; ?>"placeholder="www.youtube.com/watch?v=G1ueDkb_S6Q"style="width:40%" required>
     </div>
-    <br>
+      <br>
     <div class="form-group">
-    <input class="btn btn-primary" type="submit" name="Add_Video" value="Add Video">
+      <?php if(isset($_GET['edit_video'])) {?>
+      <input class="btn btn-primary" type="submit" name="Edit_Video" value="Submit">
+    <?php } else { ?>
+      <input class="btn btn-primary" type="submit" name="Add_Video" value="Add Video">
+    <?php } ?>
     </div>
   </form>
 </div>
-<?php } else { ?>
+<?php }  else { ?>
   <div class="row wrapper border-bottom white-bg page-heading">
       <div class="col-sm-4">
           <h2>Video Section</h2>
@@ -61,20 +86,21 @@ header("Location: help.php");
             while ($stmt->fetch())
             {
               echo "
+              <a href='help.php?edit_video={$id}'>
               <div class='col-sm-4'>
                 <div class='card' style='width:auto'>
-                <h3 class='card-title'>{$title}</h3>
+                <h3 class='card-title'><center>{$title}</center></h3>
                   <div class='embed-responsive embed-responsive-16by9'>
                       <iframe class='embed-responsive-item' src='{$link}'></iframe>
                   </div>
                   <div class='card-block'>
                 </div>
               </div>
-            </div>";
+            </div>
+            </a>";
             }
           }
       ?>
-
         </div>
     </div>
   </div>

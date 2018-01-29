@@ -1055,8 +1055,8 @@ function jobtype($jobtype) {
        <img src='http://icons.iconarchive.com/icons/graphicloads/filetype/256/pdf-icon.png' alt='' class='img-circle' style='width:50px;height:50px;''>
      </a>
      <div>
-       <p style='padding-left:5px'>$description</p>
-       <div>
+       $description
+       </div>
      </div>
      <br>
      ";
