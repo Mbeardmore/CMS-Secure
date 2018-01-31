@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once "../Portal/Includes/db.php";
+include_once("../Portal/Includes/db.php");
 include_once "../Portal/Includes/functions.php";
 include_once "../Portal/Includes/classes.php";
 date_default_timezone_set('Europe/London');
@@ -9,13 +9,13 @@ $submit = strip_tags(htmlentities($_POST['submit'],ENT_QUOTES | ENT_IGNORE, "UTF
 if (isset($submit) && $_SERVER['REQUEST_METHOD'] == "POST") {
 
 	// Prepare Query
-$stmt =$conn->prepare("SELECT ID, u_name, user_image, u_first, u_last, u_email, u_pwd, user_role FROM user WHERE u_name = ? ");
+$stmt =$conn->prepare("SELECT ID, u_name, user_image, u_first, u_last, u_email, u_pwd, user_role FROM user WHERE u_name = ? OR u_email = ? ");
 
 //Sanitize $_POST
 $user = escape($_POST['u_name']);
 $pass = escape($_POST['pwd']);
 // Bind and Execute
-$stmt->bind_param("s", $user);
+$stmt->bind_param("ss", $user, $user);
 $stmt->execute();
 
 //Bind and store Results
@@ -47,7 +47,6 @@ $stmt->close();
 					 $log = "Accessed CMS";
 				         $user = $_SESSION['u_name'];
 				         $wonum = "Login";
-
 				         $test = new log();
 				         $test->logaction($log, $wonum, $user);
 

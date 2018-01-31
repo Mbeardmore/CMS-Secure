@@ -11,7 +11,7 @@ $item_Id = escape($_GET['edit_item']);
 
 
 $query = "SELECT * FROM stock_management WHERE ID = $item_Id ";
-$select_item = mysqli_query($connection, $query);
+$select_item = mysqli_query($conn, $query);
 $row = mysqli_fetch_assoc($select_item);
     $id =             $row['ID'];
     $image =          $row['item_image'];
@@ -118,7 +118,7 @@ $row = mysqli_fetch_assoc($select_item);
           $query .="L_PURCHASE  = '{$lastpurchase}' ";
           $query .= "WHERE ID = {$item_Id} ";
 
-        $update_post = mysqli_query($connection,$query);
+        $update_post = mysqli_query($conn,$query);
 
         confirmQuery($update_post);
 

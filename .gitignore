@@ -1,3 +1,4 @@
 .ftpconfig
 Portal/Includes/db.php
 .htaccess
+.gitignore

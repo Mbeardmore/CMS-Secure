@@ -94,7 +94,7 @@ include "Includes/header.php";
 
                   $query = "INSERT INTO acommodation (accom_type, Address, Town, Postcode, work_order, Arrival, owner, special_ins) ";
                   $query .= "VALUES ('{$accomtype}','{$address}','{$town}','{$post_code}','{$wonum}','{$arrival}','{$owner}','{$special}') ";
-                  $accomresult = mysqli_query($connection, $query);
+                  $accomresult = mysqli_query($conn, $query);
 
                   confirmQuery($accomresult);
                  }?>

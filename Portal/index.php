@@ -1,7 +1,7 @@
 <?php include "Includes/header.php";
 $today = date("Y-m-d");
 $query = "UPDATE work_orders SET status = 'Pending' WHERE date_start >= '$today' AND date_start <= '$today' + INTERVAL 21 DAY AND status = 'Inactive'";
-$result = mysqli_query($connection, $query);
+$result = mysqli_query($conn, $query);
 if(isset($_SESSION['u_name'])) {}  else { header("Location: ../index.php"); die(); } 
 include "Includes/sidenav.php";
 include "Includes/topnav.php";
@@ -136,7 +136,7 @@ $pending = selectallwos('Pending') / selectallwo() * 100;
                     <?php
                                                               
                     $retmessage = "SELECT * FROM job_messages ORDER BY ID DESC LIMIT 20";
-                    $retrieve = mysqli_query($connection, $retmessage);
+                    $retrieve = mysqli_query($conn, $retmessage);
                     while ($ret = mysqli_fetch_assoc($retrieve)) {
 
                       $wonum   = $ret['Work_Order'];

@@ -6,14 +6,14 @@ include "Includes/topnav.php";
 if(is_tech($_SESSION['u_name'])) { } else { die(); }
 $session = $_SESSION['ID'];
 $query = "SELECT * FROM user WHERE ID = {$session}";
-$result = mysqli_query($connection, $query);
+$result = mysqli_query($conn, $query);
 while ($row = mysqli_fetch_assoc($result))
 {
     $image     = $row['user_image'];
 }
 $user = $_SESSION['u_first'];
 $query1 = "SELECT * FROM assigned WHERE u_first = '$user' ";
-$numrows = mysqli_query($connection, $query1);
+$numrows = mysqli_query($conn, $query1);
 $count = mysqli_num_rows($numrows);
 ?>
 <div class="page-wrapper">

@@ -12,7 +12,7 @@ $woID = escape($_GET['edit_wo']);
           $query = "SELECT * FROM work_orders WHERE ID = {$woID}";
 
 
-          $select_wo = mysqli_query($connection, $query);
+          $select_wo = mysqli_query($conn, $query);
 
           $row = mysqli_fetch_assoc($select_wo);
           $id             = $row['ID'];
@@ -282,8 +282,8 @@ $woID = escape($_GET['edit_wo']);
 
                   $query1 = "UPDATE events SET start = '{$startdate}', end = '{$enddate}' WHERE work_order = {$wonumber} ";
 
-                  $event = mysqli_query($connection, $query1);
-                  $result = mysqli_query($connection, $query);
+                  $event = mysqli_query($conn, $query1);
+                  $result = mysqli_query($conn, $query);
 
                   header("Location: view_wo.php?view_wo={$id}");
             }

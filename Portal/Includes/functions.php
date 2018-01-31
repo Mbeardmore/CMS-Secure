@@ -65,20 +65,20 @@ function is_tech($username) {
 function escape($string)
 {
 
-    global $connection;
+    global $conn;
 
-    return mysqli_real_escape_string($connection, trim($string));
+    return mysqli_real_escape_string($conn, trim($string));
 
 
 }
 
 function confirmQuery($result)
 {
-    global $connection;
+    global $conn;
 
     if (!$result) {
 
-        die("QUERY FAILED ." . " " . mysqli_error($connection));
+        die("QUERY FAILED ." . " " . mysqli_error($conn));
     }
 }
 
@@ -117,27 +117,27 @@ $stmt->close();
 
 function selectall()
 {
-    global $connection;
+    global $conn;
     $query      = "SELECT * FROM stock_management";
-    $select_all = mysqli_query($connection, $query);
+    $select_all = mysqli_query($conn, $query);
     $final_num  = mysqli_num_rows($select_all);
     return $final_num;
 }
 
 function selectallwos($status)
 {
-    global $connection;
+    global $conn;
     $query      = "SELECT * FROM work_orders WHERE status = '$status'";
-    $select_all = mysqli_query($connection, $query);
+    $select_all = mysqli_query($conn, $query);
     $wo  = mysqli_num_rows($select_all);
     return $wo;
 }
 
 function selectallwo()
 {
-    global $connection;
+    global $conn;
     $query      = "SELECT * FROM work_orders";
-    $select_all = mysqli_query($connection, $query);
+    $select_all = mysqli_query($conn, $query);
     $wo  = mysqli_num_rows($select_all);
     return $wo;
 }
@@ -191,7 +191,7 @@ Header("Location: item_search.php");
 
 function createuser() {
 
-  global $connection;
+  global $conn;
 
 
     $username = escape($_POST['user']);
@@ -211,18 +211,18 @@ function createuser() {
     $query = "INSERT INTO user (u_name, user_image, u_first, u_last, u_email, u_pwd, user_role) ";
     $query .= "VALUES ('{$username}','{$postimage}','{$fname}','{$lname}','{$email}','{$password}','{$userrole}') ";
 
-    $result = mysqli_query($connection, $query);
+    $result = mysqli_query($conn, $query);
 
     confirmQuery($result);
 }
 
 function viewallusers() {
 
-    global $connection;
+    global $conn;
 
     $query = "SELECT * FROM user";
 
-    $display_all = mysqli_query($connection, $query);
+    $display_all = mysqli_query($conn, $query);
 
 
     while ($row = mysqli_fetch_assoc($display_all)) {
@@ -301,9 +301,9 @@ header("Location: ../../index.php");
 function usersearch()
 {
 
-    global $connection;
+    global $conn;
     $query = "SELECT u_first FROM user;";
-    $display_all = mysqli_query($connection, $query);
+    $display_all = mysqli_query($conn, $query);
     while ($row = mysqli_fetch_assoc($display_all)) {
         $firstname       = $row['u_first'];
         echo "<option value='$firstname'>" . $firstname . "</option>";
@@ -314,7 +314,7 @@ function usersearch()
 
 function deleteuser() {
 
-global $connection;
+global $conn;
 
 if (isset($_GET['delete_user'])) {
 
@@ -325,7 +325,7 @@ if ($user_id === '1') { echo "You do not have permission to remove this account"
 
 }
 $query = "DELETE FROM user WHERE ID = $user_id ";
-$select_item = mysqli_query($connection, $query);
+$select_item = mysqli_query($conn, $query);
 echo "<p class='bg-sucess'> user Deleted.";
 
 }
@@ -334,7 +334,7 @@ echo "<p class='bg-sucess'> user Deleted.";
 
   function createworkorder() {
 
-    global $connection;
+    global $conn;
 
       $upload  = $_POST['file'];
       $jobtype = escape ($_POST['Jobtype']);
@@ -391,7 +391,7 @@ if(!empty($_POST['wo_number'] && $_SERVER['REQUEST_METHOD'] == "POST")) {
         $query = "INSERT INTO wo_files (wo_number, Location, Uploader) ";
         $query .= "VALUES ('{$wonumber}','{$name}','{$creator}') ";
 
-        $result = mysqli_query($connection, $query);
+        $result = mysqli_query($conn, $query);
 
         confirmQuery($result);
 
@@ -410,7 +410,7 @@ if(!empty($_POST['wo_number'] && $_SERVER['REQUEST_METHOD'] == "POST")) {
         $query1 = "INSERT INTO assigned (wo_num, u_first) ";
         $query1 .= "VALUES ('{$wonumber}','{$user}') ";
 
-        $result1 = mysqli_query($connection, $query1);
+        $result1 = mysqli_query($conn, $query1);
 
         confirmQuery($result1);
 
@@ -419,12 +419,12 @@ if(!empty($_POST['wo_number'] && $_SERVER['REQUEST_METHOD'] == "POST")) {
 
       $query = "INSERT INTO work_orders (Job_type, creator, Work_Order, job_location, company, street, city, date_today, date_start, date_end, Assigned_user, job_info, floor_size, Start, status, site_contact, client, `work_order_link`) ";
       $query .= "VALUES ('{$jobtype}','{$creator}','{$wonumber}','{$joblocation}','{$company}','{$street}','{$city}','{$datetoday}','{$startdate}','{$enddate}','{$assignedtech}','{$Jobdetails}','{$floorsize}','{$start_time}','{$active}','{$sitecontact}','{$client}','{$WOlink}') ";
-      $result = mysqli_query($connection, $query);
+      $result = mysqli_query($conn, $query);
       confirmQuery($result);
 
       $calevent = "INSERT INTO events (title, color, start, end, assigned_users, work_order) ";
       $calevent .= "VALUES ('{$combined}','{$color}','{$startdate}','{$enddate}','{$assignedtech}','{$wonumber}') ";
-      $calresult = mysqli_query($connection, $calevent);
+      $calresult = mysqli_query($conn, $calevent);
       confirmQuery($calresult);
 
       header("Location: wo_search.php");
@@ -455,12 +455,12 @@ function createaccomodation() {
 
   function WOSearch($session, $page_1){
 
-        global $connection;
+        global $conn;
         global $count;
 
     $query = "SELECT wo_num FROM assigned WHERE u_first = '$session' ";
 
-    $result = mysqli_query($connection, $query);
+    $result = mysqli_query($conn, $query);
 
     while($row = mysqli_fetch_assoc($result)) {
 
@@ -473,7 +473,7 @@ $implode = implode("','", $ID);
 
 
       $post_count = "SELECT * FROM `work_orders` WHERE `Work_Order` IN ('$implode') AND status = 'Pending' ORDER BY date_start ASC" ;
-      $find_count = mysqli_query($connection, $post_count);
+      $find_count = mysqli_query($conn, $post_count);
       $count = mysqli_num_rows($find_count);
 
       $count = ceil($count / 10);
@@ -481,7 +481,7 @@ $implode = implode("','", $ID);
 
 $query1 = "SELECT * FROM `work_orders` WHERE `Work_Order` IN ('$implode') AND status = 'Pending' ORDER BY date_start ASC LIMIT $page_1, 10";
 
-    $user_wo_res = mysqli_query($connection, $query1);
+    $user_wo_res = mysqli_query($conn, $query1);
 
 while ($row = mysqli_fetch_assoc($user_wo_res)) {
 
@@ -540,10 +540,10 @@ while ($row = mysqli_fetch_assoc($user_wo_res)) {
   function WOSearchmanager($page_1)
   {
 
-      global $connection;
+      global $conn;
       global $count;
       $post_count = "SELECT * FROM work_orders WHERE status = 'Pending' || status = 'Inactive' ORDER BY date_start ASC" ;
-      $find_count = mysqli_query($connection, $post_count);
+      $find_count = mysqli_query($conn, $post_count);
       $count = mysqli_num_rows($find_count);
 
       $count = ceil($count / 10);
@@ -551,7 +551,7 @@ while ($row = mysqli_fetch_assoc($user_wo_res)) {
 
 
 
-      $display_all = mysqli_query($connection, $query);
+      $display_all = mysqli_query($conn, $query);
 
 
       while ($row = mysqli_fetch_assoc($display_all)) {
@@ -614,10 +614,10 @@ while ($row = mysqli_fetch_assoc($user_wo_res)) {
   function WOSearchmanagercompleted($page_1)
   {
 
-      global $connection;
+      global $conn;
       global $count;
       $post_count = "SELECT * FROM work_orders WHERE status = 'Completed' " ;
-      $find_count = mysqli_query($connection, $post_count);
+      $find_count = mysqli_query($conn, $post_count);
       $count = mysqli_num_rows($find_count);
 
       $count = ceil($count / 10);
@@ -625,7 +625,7 @@ while ($row = mysqli_fetch_assoc($user_wo_res)) {
 
 
 
-      $display_all = mysqli_query($connection, $query);
+      $display_all = mysqli_query($conn, $query);
 
 
       while ($row = mysqli_fetch_assoc($display_all)) {
@@ -682,16 +682,16 @@ while ($row = mysqli_fetch_assoc($user_wo_res)) {
 function WOSearchadmin($page_1)
   {
 
-      global $connection;
+      global $conn;
       global $count;
       $post_count = "SELECT * FROM work_orders WHERE status ='Pending' " ;
-      $find_count = mysqli_query($connection, $post_count);
+      $find_count = mysqli_query($conn, $post_count);
       $count = mysqli_num_rows($find_count);
 
       $count = ceil($count / 10);
       $query = "SELECT * FROM work_orders WHERE status = 'Pending' ORDER BY date_start ASC LIMIT $page_1, 10" ;
 
-      $display_all = mysqli_query($connection, $query);
+      $display_all = mysqli_query($conn, $query);
 
 
       while ($row = mysqli_fetch_assoc($display_all)) {
@@ -749,7 +749,7 @@ function WOSearchadmin($page_1)
 
 function deletewo() {
 
-global $connection;
+global $conn;
 
 if (isset($_GET['delete_wo'])) {
 
@@ -764,24 +764,24 @@ $messages = "DELETE  FROM job_messages WHERE Work_Order = '$wo_num' ";
 $wo_messages = "DELETE  FROM work_order_images WHERE wo_number = '$wo_num' ";
 $files = "DELETE  FROM wo_files WHERE wo_number = '$wo_num' ";
 
-$wo_message = mysqli_query($connection, $wo_messages);
-$wo_files = mysqli_query($connection, $files);
-$event_query = mysqli_query($connection, $event);
-$select_item = mysqli_query($connection, $query);
+$wo_message = mysqli_query($conn, $wo_messages);
+$wo_files = mysqli_query($conn, $files);
+$event_query = mysqli_query($conn, $event);
+$select_item = mysqli_query($conn, $query);
 echo "<p class='bg-sucess'> Work order Deleted.";
 
 header("Location: wo_search.php");
 
 }
   function addnote($wonum, $tech) {
-   global $connection;
+   global $conn;
 
    $note = escape($_POST['add-note']);
 
    $query = "INSERT INTO wo_notes (wo_num, message, tech) ";
    $query .= "VALUES('{$wonum}','{$note}','{$tech}') ";
 
-   $addnote = mysqli_query($connection, $query);
+   $addnote = mysqli_query($conn, $query);
 
    confirmQuery($addnote);
 
@@ -822,7 +822,7 @@ function resizeImage($SrcImage,$DestImage, $MaxWidth,$MaxHeight,$Quality)
 }
 
 function handleimages($jobloc, $wonum, $tech) {
-  global $connection;
+  global $conn;
 
 $path = "Images/wo_images/$wonum.$jobloc/";
 
@@ -847,7 +847,7 @@ if (is_dir($path))
       $query = "INSERT INTO work_order_images (wo_number, Location, Uploader) ";
       $query .= "VALUES ('{$wonum}','{$newfilename}','{$tech}') ";
 
-      $result = mysqli_query($connection, $query);
+      $result = mysqli_query($conn, $query);
 
       confirmQuery($result);
       }
@@ -880,7 +880,7 @@ if (is_dir($path))
         $query = "INSERT INTO work_order_images (wo_number, Location, Uploader) ";
         $query .= "VALUES ('{$wonum}','{$newfilename}','{$tech}') ";
 
-        $result = mysqli_query($connection, $query);
+        $result = mysqli_query($conn, $query);
 
         confirmQuery($result);
 
@@ -895,7 +895,7 @@ if (is_dir($path))
 
 
 function completewo($wonum, $id) {
-global $connection;
+global $conn;
 global $conn;
 
                $techsig        = escape($_POST['Tech']);
@@ -917,14 +917,14 @@ global $conn;
 
 
                 $accom = "SELECT * FROM acommodation WHERE work_order = '$wonum' ";
-                $result = mysqli_query($connection, $accom);
+                $result = mysqli_query($conn, $accom);
                if(mysqli_num_rows($result) == 1 ) {
 
                 $stmt = "UPDATE acommodation SET rating = '$rating', summary = '$asummary' WHERE work_order = '$wonum' ";
-                $update_accom = mysqli_query($connection,$stmt);
+                $update_accom = mysqli_query($conn,$stmt);
                } else {}
 
-              $update_workorder = mysqli_query($connection,$query);
+              $update_workorder = mysqli_query($conn,$query);
 
                 header("Location: wo_search.php");
              }

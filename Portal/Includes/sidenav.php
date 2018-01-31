@@ -1,7 +1,7 @@
 <?php
 $session = $_SESSION['ID'];
 $query = "SELECT user_image FROM user WHERE ID = {$session}";
-$result = mysqli_query($connection, $query);
+$result = mysqli_query($conn, $query);
 while ($row = mysqli_fetch_assoc($result))
 {
     $image     = $row['user_image'];

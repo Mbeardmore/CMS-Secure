@@ -61,12 +61,12 @@ else
                                     $search = escape($_POST['text']);
 
                                   $post_count = "SELECT * FROM work_orders WHERE Work_Order LIKE  '%$search%' OR company LIKE '%$search%' " ;
-                                  $find_count = mysqli_query($connection, $post_count);
+                                  $find_count = mysqli_query($conn, $post_count);
                                   $count = mysqli_num_rows($find_count);
                                   $count = ceil($count / 10);
                                   confirmQuery($count);
                                     $query = "SELECT * FROM work_orders WHERE Work_Order LIKE '%$search%' OR company LIKE '%$search%' ";
-                                      $display_all = mysqli_query($connection, $query);
+                                      $display_all = mysqli_query($conn, $query);
                                      confirmQuery($display_all);
                                       while ($row = mysqli_fetch_assoc($display_all)) {
                                           $id             = $row['ID'];

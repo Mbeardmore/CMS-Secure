@@ -83,11 +83,13 @@ if(isset($_POST['Update'])) {
 	$startd      = $_POST['start_date'];
 	$endd        = $_POST['end_date'];
 	$id          = escape($_GET['holiday_edit']);
+  $code        = "0";
 
-	$stmt = $conn->prepare("UPDATE events SET title = ?, start = ?, `end` = ?, Approved = ? WHERE id = {$id} ");
-	$stmt->bind_param("ssss", $title, $startd, $endd, $status);
+	$stmt = $conn->prepare("UPDATE events SET title = ?, start = ?, `end` = ?, Approved = ?, Code = ? WHERE id = {$id} ");
+	$stmt->bind_param("sssss", $title, $startd, $endd, $status, $code);
 	$stmt->execute();
-
+  $stmt->close();
+  header("Location: view-Holiday.php");
 	}
 }
  ?>
