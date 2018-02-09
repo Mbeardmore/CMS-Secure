@@ -47,7 +47,6 @@ $stmt1->close();
  					<textarea class="input-block-level" id="summernote" name="Job-Details" rows="18"><?php echo $instructions; ?></textarea>
  				</div>
  				<?php if (isset($_GET['edit_spec'])) {
-
  					echo "<input class='btn btn-primary' type='submit' name='update'>";
  				} else  {
  					echo "<input class='btn btn-primary' type='submit' value='Add new' name='newspec'>";
@@ -64,6 +63,7 @@ if (isset($_POST['update'])) {
 	$stmt->bind_param("si", $specdetails,$id);
 	$stmt->execute();
 	$stmt->close();
+  header("Location: settings.php");
 } elseif (isset($_POST['newspec'])) {
 	$jobtype    = $_POST['Jobtype'];
 	$jobdetails = escape($_POST['Job-Details']);

@@ -38,6 +38,8 @@
                     <option value="Apple_Strip_FOH_Ardex">Apple Deep & Seal FOH / Ardex </option>
                     <option value="Apple_Strip_FOH_NoArdex">Apple Deep & Seal FOH/Non Ardex</option>
                     <option value="Apple_Strip_FOH_Terrazzo">Apple Deep & Seal FOH / Terrazzo</option>
+                    <option value"Apple_Deep_Clean_FOH_Ardex">Apple Deep Clean FOH Ardex</option>
+                    <option value"Apple_Deep_Clean_FOH_N_Ardex">Apple Deep Clean FOH Non Ardex</option>
                     <option value="Apple_ardex_removal">Apple Ardex Removal</option>
                     <option value="Apple_hone">Apple Stone Honing</option>
                     <option value="Apple_strip_BOH">Apple Strip & Seal BOH</option>
@@ -47,6 +49,7 @@
                     <option value="carpet_clean">Carpet Cleaning</option>
                     <option value="Slip_Treatment">Anti-Slip Treatment</option>
                     <option value="Annual Service">Annual Service </option>
+
 
                 </select>
                 </div>
@@ -61,11 +64,11 @@
                   <!-- Text input-->
                   <div class="form-group" style="position: relative;right:13px;">
 
-                    <div class="col-sm-4">
+                    <div class="col-sm-6">
                         <label for="textinput">Street</label>
                       <input type="text" placeholder="Street" name="street" class="form-control">
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-6">
                         <label  for="textinput">City</label>
                       <input type="text" placeholder="City" name="city" class="form-control">
                     </div>

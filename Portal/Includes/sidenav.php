@@ -1,7 +1,7 @@
 <?php
 $session = $_SESSION['ID'];
 $query = "SELECT user_image FROM user WHERE ID = {$session}";
-$result = mysqli_query($conn, $query);
+$result = mysqli_query($connection, $query);
 while ($row = mysqli_fetch_assoc($result))
 {
     $image     = $row['user_image'];
@@ -32,6 +32,11 @@ while ($row = mysqli_fetch_assoc($result))
             <li>
                 <a href="index.php"><i class="fa fa-diamond"></i> <span class="nav-label">Dashboard</span></a>
             </li>
+            <?php if (is_manager($_SESSION['u_name'])) { ?>
+            <li>
+                <a href="Features.php"><i class="fa fa-bug"></i> <span class="nav-label">Features Tracker</span></a>
+            </li>
+          <?php } ?>
             <li>
                 <a href=""><i class="fa fa-info"></i> <span class="nav-label">Help Section</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
@@ -56,7 +61,6 @@ while ($row = mysqli_fetch_assoc($result))
                     <li>
                         <a href="store_info.php">Store Information Database</a>
                     </li>
-
                 </ul>
             </li>
             <?php } ?>
@@ -86,12 +90,9 @@ while ($row = mysqli_fetch_assoc($result))
                          <li><a href="calenderadmin.php">View Calender</a></li>
                          <li><a href="view-Holiday.php">View Booked Holidays</a></li>
                     <?php } else { ?>
-
-                         <li><a href="calender.php">Technician Calender</a></li>
+                         <li><a href="calender.php">Calender</a></li>
                    <?php } ?>
                         <li><a href="booking.php">Book Holiday</a></li>
-
-
                 </ul>
             </li>
             <?php if(is_manager($_SESSION['u_name'])) { ?>
@@ -111,11 +112,8 @@ while ($row = mysqli_fetch_assoc($result))
             <li>
                 <a href="settings.php"><i class="fa fa-wrench"></i> <span class="nav-label">Settings</span></a>
             </li>
-            <?php } ?>
-
-
+              <?php } ?>
         </ul>
-
     </div>
 </nav>
 </div>

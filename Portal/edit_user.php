@@ -14,7 +14,7 @@
 $userid = escape($_GET['edit_user']);
 
 $query = "SELECT * FROM user WHERE ID = {$userid} ";
-$select_user = mysqli_query($conn, $query);
+$select_user = mysqli_query($connection, $query);
 
 $row = mysqli_fetch_assoc($select_user);
     $id              = $row['ID'];

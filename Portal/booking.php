@@ -63,14 +63,16 @@ if(isset($_POST['Submit'])) {
 	$name       = $_POST['Name'] . " " . "Annual Leave";
 	$color      = "#02d1e0";
 	$start_date = $_POST['start_date'];
-	$end_date   = $_POST['end_date'];
 	$signature  = $_POST['Signature'];
 	$status 	= 'Awaiting Approval';
 	$flag     = '2';
+  $enddate = $_POST['end_date'];
+
+
 
 
 	$stmt = $conn->prepare("INSERT INTO events (title, color, start, `end`, signature, Approved, Code) VALUES (?,?,?,?,?,?,?) ");
-	$stmt->bind_param("ssssssi", $name, $color, $start_date, $end_date, $signature, $status, $flag);
+	$stmt->bind_param("ssssssi", $name, $color, $start_date, $enddate, $signature, $status, $flag);
 	$stmt->execute();
 	$stmt->close();
 

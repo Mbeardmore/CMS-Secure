@@ -25,13 +25,24 @@ $stmt->fetch();
 $stmt->close();
 }
 if (isset($_POST['Edit_Video'])) {
+
  $newtitle = $_POST['title'];
  $newlink = $_POST['youtube'];
+  if($newtitle!="" && $newlink!="" ) {
 $stmt = $conn->prepare("UPDATE media SET title = ?, link = ? WHERE ID = ?");
 $stmt->bind_param("ssi",$newtitle, $newlink, $ID);
 $stmt->execute();
 $stmt->close();
 header("Location: help.php?edit_video=$ID");
+}
+elseif ($newtitle="" && $newlink="")
+{
+  $stmt = $conn->prepare("DELETE FROM media WHERE ID = ?");
+  $stmt->bind_param("i",$ID);
+  $stmt->execute();
+  $stmt->close();
+  header("Location: help.php?edit_video=$ID");
+}
 }
 ?>
 <div class="panel-body" id="formbody">

@@ -1,5 +1,5 @@
 <?php
-include "db.php";
+require_once("db.php");
 
 function is_admin($username) {
 
@@ -385,24 +385,14 @@ if(!empty($_POST['wo_number'] && $_SERVER['REQUEST_METHOD'] == "POST")) {
       $actualExt = strtolower(end($fileext));
 
       if (in_array($actualExt, $valid_formats)) {
-
         move_uploaded_file($_FILES['file']['tmp_name'][$f], $path . $name);
-
-        $query = "INSERT INTO wo_files (wo_number, Location, Uploader) ";
-        $query .= "VALUES ('{$wonumber}','{$name}','{$creator}') ";
-
-        $result = mysqli_query($conn, $query);
-
-        confirmQuery($result);
-
-        } else
+        }
+         else
         {
         echo "Wrong File Extension";
         }
       }
     }
-
-
   }
       if(!empty($assigned)) {
       foreach ($exploded as $user) {
@@ -413,7 +403,6 @@ if(!empty($_POST['wo_number'] && $_SERVER['REQUEST_METHOD'] == "POST")) {
         $result1 = mysqli_query($conn, $query1);
 
         confirmQuery($result1);
-
       }
     }
 

@@ -152,6 +152,7 @@ $events = $req->fetchAll();
 
 <script>
 
+
     $(document).ready(function() {
 
         $('#calendar').fullCalendar({
@@ -165,12 +166,14 @@ $events = $req->fetchAll();
             eventLimit: true, // allow "more" link when too many events
             selectable: true,
             selectHelper: true,
+            allDay: true,
             select: function(start, end) {
 
                 $('#ModalAdd #start').val(moment(start).format('YYYY-MM-DD HH:mm:ss'));
                 $('#ModalAdd #end').val(moment(end).format('YYYY-MM-DD HH:mm:ss'));
                 $('#ModalAdd').modal('show');
             },
+
             eventRender: function(event, element) {
                 element.bind('dblclick', function() {
                     $('#ModalEdit #id').val(event.id);
@@ -186,6 +189,12 @@ $events = $req->fetchAll();
             },
             eventResize: function(event,dayDelta,minuteDelta,revertFunc) {
                 edit(event);
+            },
+            eventDataTransform: function(event) {
+              if(event.color === '#02d1e0' ) {
+                event.end = moment(event.end).add(1, 'days')
+              }
+              return event;
             },
             events: [
             <?php foreach($events as $event):

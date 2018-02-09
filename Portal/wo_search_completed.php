@@ -77,7 +77,7 @@ if ($page == "" || $page == 1) {
 
                                 
                                   $post_count = "SELECT * FROM work_orders WHERE Work_Order LIKE  '%$search%' OR company LIKE '%$search%' AND status = 'Completed' " ;
-                                  $find_count = mysqli_query($conn, $post_count);
+                                  $find_count = mysqli_query($connection, $post_count);
                                   $count = mysqli_num_rows($find_count);
 
 
@@ -85,7 +85,7 @@ if ($page == "" || $page == 1) {
                                     
                                     $query = "SELECT * FROM work_orders WHERE Work_Order LIKE '%$search%' OR company LIKE '%$search%' AND status = 'Completed' ";
 
-                                      $display_all = mysqli_query($conn, $query);
+                                      $display_all = mysqli_query($connection, $query);
 
                                       confirmQuery($display_all);
 

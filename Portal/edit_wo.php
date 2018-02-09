@@ -12,7 +12,7 @@ $woID = escape($_GET['edit_wo']);
           $query = "SELECT * FROM work_orders WHERE ID = {$woID}";
 
 
-          $select_wo = mysqli_query($conn, $query);
+          $select_wo = mysqli_query($connection, $query);
 
           $row = mysqli_fetch_assoc($select_wo);
           $id             = $row['ID'];
@@ -164,8 +164,6 @@ $woID = escape($_GET['edit_wo']);
 
             <?php if(isset($_POST['update_wo'])) {
 
-
-
                 $creator = $_SESSION['u_first'];
                 $company = escape($_POST['company']);
                 $street   = escape($_POST['street']);
@@ -209,14 +207,8 @@ $woID = escape($_GET['edit_wo']);
                       if (in_array($actualExt, $valid_formats)) {
 
                         move_uploaded_file($_FILES['file']['tmp_name'][$f], $path . $name);
-
-
-
-                        $stmt = $conn->prepare("INSERT INTO wo_files (wo_number, Location, Uploader) VALUES (?,?,?) ");
-                        $stmt->bind_param("sss", $wonumber, $name, $creator);
-                        $stmt->execute();
-                        $stmt->close();
-                        } else
+                        }
+                        else
                         {
                         echo "Wrong File Extension";
                         }
@@ -282,8 +274,8 @@ $woID = escape($_GET['edit_wo']);
 
                   $query1 = "UPDATE events SET start = '{$startdate}', end = '{$enddate}' WHERE work_order = {$wonumber} ";
 
-                  $event = mysqli_query($conn, $query1);
-                  $result = mysqli_query($conn, $query);
+                  $event = mysqli_query($connection, $query1);
+                  $result = mysqli_query($connection, $query);
 
                   header("Location: view_wo.php?view_wo={$id}");
             }
