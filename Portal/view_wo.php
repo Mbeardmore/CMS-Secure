@@ -14,7 +14,7 @@ include_once "Includes/header.php";
 
           $woID = escape($_GET['view_wo']);
           $query = "SELECT * FROM work_orders WHERE ID = {$woID}";
-          $select_wo = mysqli_query($connection, $query);
+          $select_wo = mysqli_query($conn, $query);
 
           $row = mysqli_fetch_assoc($select_wo);
           $id             = $row['ID'];
@@ -110,7 +110,7 @@ include_once "Includes/header.php";
                                           ?>
                                             <?php
                                               $accom = "SELECT * FROM acommodation WHERE work_order = '$wonum'";
-                                              $result = mysqli_query($connection, $accom);
+                                              $result = mysqli_query($conn, $accom);
                                             if(mysqli_num_rows($result) <  1 ) {} else { ?>
                                             <li class=""><a href="#tab-4" data-toggle="tab">Accomodation</a></li>
                                             <?php  } ?>
@@ -133,7 +133,7 @@ include_once "Includes/header.php";
                                           <?php
 
                                           $retmessage = "SELECT * FROM job_messages WHERE Work_Order = '$wonum' ";
-                                          $retrieve = mysqli_query($connection, $retmessage);
+                                          $retrieve = mysqli_query($conn, $retmessage);
                                           while ($ret = mysqli_fetch_assoc($retrieve)) {
 
                                             $message = $ret['message'];
@@ -173,7 +173,7 @@ include_once "Includes/header.php";
                                                 $addmessage = "INSERT INTO job_messages (Work_Order, u_name, message, time_added) ";
                                                 $addmessage .= "VALUES ('{$wonum}','{$tech}','{$message}','{$timedate}') ";
 
-                                                $mesresult = mysqli_query($connection, $addmessage);
+                                                $mesresult = mysqli_query($conn, $addmessage);
 
                                                 confirmQuery($mesresult);
 
@@ -258,7 +258,7 @@ include_once "Includes/header.php";
                                   <?php
                                   $accom = "SELECT * FROM acommodation WHERE work_order = '$wonum'";
 
-                                  $result = mysqli_query($connection, $accom);
+                                  $result = mysqli_query($conn, $accom);
 
                                   $res = mysqli_fetch_assoc($result);
 
@@ -399,7 +399,7 @@ include_once "Includes/header.php";
 
                   <?php
                     $images = "SELECT * FROM work_order_images WHERE wo_number = '$wonum' ";
-                    $result = mysqli_query($connection, $images);
+                    $result = mysqli_query($conn, $images);
                     while($row = mysqli_fetch_assoc($result)) {
 
                       $imageloc = $row['Location'];
@@ -477,7 +477,7 @@ include_once "Includes/header.php";
                     </p>
                     </section>
                     <?php $accom = "SELECT * FROM acommodation WHERE work_order = '$wonum'";
-                            $result = mysqli_query($connection, $accom);
+                            $result = mysqli_query($conn, $accom);
                               if(mysqli_num_rows($result) <  1 ) { } else { ?>
                 <h3>Accomodation</h3>
                 <section>

@@ -99,6 +99,12 @@ $events = $req->fetchAll();
                 edit(event);
 
             },
+            eventDataTransform: function(event) {
+              if(event.color === '#02d1e0' ) {
+                event.end = moment(event.end).add(1, 'days')
+              }
+              return event;
+            },
             events: [
             <?php foreach($events as $event):
 

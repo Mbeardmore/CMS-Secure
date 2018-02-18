@@ -94,5 +94,5 @@ header("Location: add_store.php");
  header ("Location: ../index.html");
 }
 ?>
- </div> 
+ </div>
  <?php include "Includes/footer.php"; ?>

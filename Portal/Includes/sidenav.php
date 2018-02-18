@@ -1,10 +1,10 @@
 <?php
 $session = $_SESSION['ID'];
 $query = "SELECT user_image FROM user WHERE ID = {$session}";
-$result = mysqli_query($connection, $query);
+$result = mysqli_query($conn, $query);
 while ($row = mysqli_fetch_assoc($result))
 {
-    $image     = $row['user_image'];
+    $image = $row['user_image'];
 }
 ?>
 <div id="wrapper">
@@ -14,7 +14,7 @@ while ($row = mysqli_fetch_assoc($result))
             <li class="nav-header">
                 <div class="dropdown profile-element">
                     <span>
-                    <img href="../index.php" alt="image" class="img-circle" src="Images/user_images/<?php echo $image; ?>" style="width:100px;height:100px;">
+                    <img href="../index.php" alt="image" class="img-circle" src="Images/user_images/<?php echo $image;?>" style="width:100px;height:100px;">
                      </span>
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                     <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold"><?php echo $_SESSION['u_first'] . " " . $_SESSION['u_last'] ?></strong>
@@ -34,9 +34,12 @@ while ($row = mysqli_fetch_assoc($result))
             </li>
             <?php if (is_manager($_SESSION['u_name'])) { ?>
             <li>
-                <a href="Features.php"><i class="fa fa-bug"></i> <span class="nav-label">Features Tracker</span></a>
+                <a href="Features.php"><i class="fa fa-bug"></i> <span class="nav-label" >Features Tracker</span></a>
             </li>
           <?php } ?>
+          <li>
+              <a href="siteaudit.php"><i class="fa fa-sitemap"></i> <span class="nav-label">Site Audit</span></a>
+          </li>
             <li>
                 <a href=""><i class="fa fa-info"></i> <span class="nav-label">Help Section</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
@@ -66,9 +69,10 @@ while ($row = mysqli_fetch_assoc($result))
             <?php } ?>
             <?php if(is_manager($_SESSION['u_name'])) { ?>
             <li>
-            <a href=""><i class="fa fa-folder-open-o"></i> <span class="nav-label">Quotations</span> <span class="fa arrow"></span></a>
+            <a href=""><i class="fa fa-folder-open-o"></i> <span class="nav-label">Site Surveys</span> <span class="fa arrow"></span></a>
             <ul class="nav nav-second-level collapse">
                 <li><a href="create_appointment.php">Create Appointment</a></li>
+                <li><a href="">Apple Site Survey</a></li> 
             </ul>
         </li>
         <?php } else {} ?>
@@ -100,7 +104,7 @@ while ($row = mysqli_fetch_assoc($result))
              <li>
                 <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Users</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a href="register.php">Create User</a></li>
+                    <li><a href="user.php">Create User</a></li>
                     <?php } else {}
                     if(is_manager($_SESSION['u_name'])) {?>
                     <li><a href="manage_user.php">Manage Users</a></li>

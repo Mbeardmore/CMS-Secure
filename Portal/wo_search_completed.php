@@ -1,18 +1,8 @@
-<?php include "Includes/header.php"; 
-
-
-?>
-
-<?php 
-
+<?php include "Includes/header.php";
 if(isset($_GET['page'])) {
-
 $page = $_GET['page'];
-
 } else {
-
  $page = "";
-
 }
 
 if ($page == "" || $page == 1) {
@@ -25,9 +15,8 @@ if ($page == "" || $page == 1) {
 
  ?>
 <body>
-
     <div id="wrapper">
-        <?php 
+        <?php
         include "Includes/sidenav.php";
         include "Includes/topnav.php";
          ?>
@@ -50,12 +39,9 @@ if ($page == "" || $page == 1) {
                                         <button type="submit" name="search" class="btn btn-sm btn-primary"> Go!</button> </span></div>
                                         <?php } else {} ?>
                                     </form>
-
-
-
                                 </div>
                             </div>
-                            
+
                             <div class="project-list">
 
                                 <table class="table table-hover">
@@ -66,26 +52,26 @@ if ($page == "" || $page == 1) {
                                         <td>End Date</td>
                                         <td></td>
                                         <td style="float:right;">Assigned Techs</td>
-                                     
+
                                     </th>
                                     <tbody>
-                                  <?php 
+                                  <?php
 
                                   if(isset($_POST['search'])) {
                                     $search = escape($_POST['text']);
 
 
-                                
+
                                   $post_count = "SELECT * FROM work_orders WHERE Work_Order LIKE  '%$search%' OR company LIKE '%$search%' AND status = 'Completed' " ;
-                                  $find_count = mysqli_query($connection, $post_count);
+                                  $find_count = mysqli_query($conn, $post_count);
                                   $count = mysqli_num_rows($find_count);
 
 
                                   $count = ceil($count / 10);
-                                    
+
                                     $query = "SELECT * FROM work_orders WHERE Work_Order LIKE '%$search%' OR company LIKE '%$search%' AND status = 'Completed' ";
 
-                                      $display_all = mysqli_query($connection, $query);
+                                      $display_all = mysqli_query($conn, $query);
 
                                       confirmQuery($display_all);
 
@@ -136,48 +122,36 @@ if ($page == "" || $page == 1) {
                                                   <a href='edit_wo.php?edit_wo={$id}' class='btn btn-white btn-sm'><i class='fa fa-pencil'></i> Edit </a>
                                               </td>
                                           </tr>";
-     
-                                    }
 
+                                    }
 
                                   } else {
 
                                     if (is_manager($_SESSION['u_name'])) {
 
-                                        WOSearchmanagercompleted($page_1, $dateend);
+                                      $count =  WOSearchmanagercompleted($page_1, $dateend);
                                       }
                                     }
                                      ?>
-                                    
+
                                     </tbody>
 
                                 </table>
 
                                 <nav aria-label="Page navigation example">
                                   <ul class="pagination">
-                
+
                                     <?php for($i = 1; $i <= $count; $i++) {
 
                                         echo "<li class='page-item'><a class='page-link' href='wo_search_completed.php?page={$i}'>{$i}</a></li>";
                                     }
-
                                      ?>
-                                    
-
                                   </ul>
                                 </nav>
-
                             </div>
-
                         </div>
-
-
                     </div>
-
-
     </div>
-
-
 
     <?php include "Includes/footer.php"; ?>
     <!-- Page-Level Scripts -->

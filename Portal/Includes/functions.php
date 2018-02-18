@@ -168,8 +168,6 @@ global $conn;
 
 }
 
-
-
 function deleteitem() {
 
 global $conn;
@@ -242,7 +240,7 @@ function viewallusers() {
         echo "<td>" . $userrole . "</td>";
         echo "<td>" . $lastonline . "</td>";
 
-        echo "<td><a href='edit_user.php?edit_user={$id}'>Edit</a></td>";
+        echo "<td><a href='user.php?edit_user={$id}'>Edit</a></td>";
         echo "<td><a href='manage_user.php?delete_user={$id}'>Delete</a></td>";
         echo "</tr>";
     }
@@ -300,7 +298,6 @@ header("Location: ../../index.php");
 
 function usersearch()
 {
-
     global $conn;
     $query = "SELECT u_first FROM user;";
     $display_all = mysqli_query($conn, $query);
@@ -308,9 +305,7 @@ function usersearch()
         $firstname       = $row['u_first'];
         echo "<option value='$firstname'>" . $firstname . "</option>";
     }
-
   }
-
 
 function deleteuser() {
 
@@ -445,7 +440,6 @@ function createaccomodation() {
   function WOSearch($session, $page_1){
 
         global $conn;
-        global $count;
 
     $query = "SELECT wo_num FROM assigned WHERE u_first = '$session' ";
 
@@ -530,7 +524,6 @@ while ($row = mysqli_fetch_assoc($user_wo_res)) {
   {
 
       global $conn;
-      global $count;
       $post_count = "SELECT * FROM work_orders WHERE status = 'Pending' || status = 'Inactive' ORDER BY date_start ASC" ;
       $find_count = mysqli_query($conn, $post_count);
       $count = mysqli_num_rows($find_count);
@@ -604,7 +597,6 @@ while ($row = mysqli_fetch_assoc($user_wo_res)) {
   {
 
       global $conn;
-      global $count;
       $post_count = "SELECT * FROM work_orders WHERE status = 'Completed' " ;
       $find_count = mysqli_query($conn, $post_count);
       $count = mysqli_num_rows($find_count);
@@ -672,7 +664,6 @@ function WOSearchadmin($page_1)
   {
 
       global $conn;
-      global $count;
       $post_count = "SELECT * FROM work_orders WHERE status ='Pending' " ;
       $find_count = mysqli_query($conn, $post_count);
       $count = mysqli_num_rows($find_count);

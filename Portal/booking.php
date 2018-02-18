@@ -66,8 +66,9 @@ if(isset($_POST['Submit'])) {
 	$signature  = $_POST['Signature'];
 	$status 	= 'Awaiting Approval';
 	$flag     = '2';
-  $enddate = $_POST['end_date'];
-
+  $date = $_POST['end_date'];
+  $date1 = str_replace('-', '/', $date);
+  $enddate = date('Y-m-d',strtotime($date1 . "+1 days"));
 
 
 
