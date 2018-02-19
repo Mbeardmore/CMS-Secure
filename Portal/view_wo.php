@@ -83,7 +83,6 @@ include_once "Includes/header.php";
                                 </div>
                                 <div class="col-lg-7" id="cluster_info">
                                     <dl class="dl-horizontal" >
-
                                         <dt>Google Maps</dt> <dd><a href="https://www.google.com/maps/dir//<?php echo $company; ?>,+<?php echo $street; ?>,+<?php echo $city ?>,+United+Kingdom/" class="btn btn-primary btn-xs">Get Directions</a></dd>
                                         <dt>Created:</dt> <dd>  <?php echo $creation; ?> </dd>
                                         <dt>Participants:</dt>
@@ -123,9 +122,7 @@ include_once "Includes/header.php";
                                          </ul>
                                     </div>
                                 </div>
-
                                 <div class="panel-body">
-
                                 <div class="tab-content">
                                 <div class="tab-pane active" id="tab-1">
                                     <div class="feed-activity-list" style="height:400px;overflow-y: scroll;border: 1px solid #e7eaec;border-radius: 5px;;" id="message">
@@ -298,7 +295,6 @@ include_once "Includes/header.php";
                                 </div>
 
                                  <div class="tab-pane" id="tab-5">
-
                                   <dt>Consumable Cost<dt> <dd><dd>
                                   <br>
                                   <dt>Cleanse</dt> <dd><dd>
@@ -306,7 +302,6 @@ include_once "Includes/header.php";
                                   <dt>Defence</dt> <dd></dd>
                                   <dt>Dr Schutz PU sealer</dt> <dd></dd>
                                   <dt>Total Cost: </dt> <dd></dd>
-
                                  </div>
                                  <?php } ?>
                                  <div style="" class="tab-pane" id="tab-6">
@@ -350,7 +345,6 @@ include_once "Includes/header.php";
                 </div>
             </div>
 </div>
-
 <div class="col-lg-3">
                 <div class="wrapper wrapper-content project-manager">
                     <h4>Project description & Procedures</h4>
