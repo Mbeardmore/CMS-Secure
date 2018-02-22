@@ -1,7 +1,20 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+
+<?php
+include_once "Portal/Includes/db.php";
+include_once "Portal/Includes/functions.php";
+if (isset($_GET['id'])) {
+
+  $Survey = escape($_GET['id']);
+  $stmt = $conn->prepare("SELECT ID, SECURE, EMAIL, STARTD, ENDD, WONUM, NOS, STOREID FROM pre_survey WHERE SECURE = '$Survey' ");
+  $stmt->execute();
+  $stmt->bind_result($ID, $SECURE, $EMAIL, $STARTD, $ENDD, $WONUM, $NOS, $STOREID);
+  $stmt->fetch();
+  $stmt->close();
+
+} ?>
 <body style="background-color:f5f5f5">
 <div class="container">
        <table class="table table-striped">
@@ -14,10 +27,10 @@
 										 			<img class="img-responsive" style="margin:auto;width:30%" src="../logo.png">
 										 	</div>
 												 <div class="col-lg-12">
-														 <dl class="">
-																 <dt>Store Number:</dt> <dd><dd>
-																 <dt>Date of Works:</dt> <dd></dd>
-																 <dt>Nights on Site:</dt> <dd></dd>
+														 <dl class="dl-horizontal">
+																 <dt>Store Number:</dt> <dd><?php echo $STOREID ?><dd>
+																 <dt>Date of Works:</dt> <dd><?php echo $STARTD; ?></dd>
+																 <dt>Nights on Site:</dt> <dd><?php echo $NOS;?></dd>
 														 </dl>
 													 </div>
 													 <div style="padding-left:3%;padding-right:3%">
@@ -117,3 +130,8 @@
 		                   </form>
 		                </td>
 									</div>
+<?php if (isset($_POST['com_survey'])) {
+
+
+
+} ?>

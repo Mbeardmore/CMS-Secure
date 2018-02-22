@@ -37,9 +37,6 @@ while ($row = mysqli_fetch_assoc($result))
                 <a href="Features.php"><i class="fa fa-bug"></i> <span class="nav-label" >Features Tracker</span></a>
             </li>
           <?php } ?>
-          <li>
-              <a href="siteaudit.php"><i class="fa fa-sitemap"></i> <span class="nav-label">Site Audit</span></a>
-          </li>
             <li>
                 <a href=""><i class="fa fa-info"></i> <span class="nav-label">Help Section</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
@@ -72,7 +69,7 @@ while ($row = mysqli_fetch_assoc($result))
             <a href=""><i class="fa fa-folder-open-o"></i> <span class="nav-label">Site Surveys</span> <span class="fa arrow"></span></a>
             <ul class="nav nav-second-level collapse">
                 <li><a href="create_appointment.php">Create Appointment</a></li>
-                <li><a href="">Apple Site Survey</a></li> 
+                <li><a href="">Apple Site Survey</a></li>
             </ul>
         </li>
         <?php } else {} ?>
