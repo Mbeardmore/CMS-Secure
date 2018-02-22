@@ -137,7 +137,7 @@ $pending = selectallwos('Pending') / selectallwo() * 100;
                       $sent    = $ret['time_added'];
                     ?>
                     <div class="feed-element" style="margin:2%; margin-top:0;">
-                        <a class="pull-left" href="#"><strong>Wo: <?php echo $wonum; ?></strong></a>
+                        <a class="pull-left" href="https://beaverfloorcare.com/Portal/view_wo.php?view_wo=<?php echo $wonum; ?>"><strong>Wo: <?php echo $wonum; ?></strong></a>
                         <br>
                         <div class="media-body">
                             <strong><?php echo $name; ?></strong><br>

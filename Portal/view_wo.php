@@ -13,7 +13,7 @@ include_once "Includes/header.php";
           $tech = $_SESSION['u_first'];
 
           $woID = escape($_GET['view_wo']);
-          $query = "SELECT * FROM work_orders WHERE ID = {$woID}";
+          $query = "SELECT * FROM work_orders WHERE ID = {$woID} OR Work_Order = {$woID}";
           $select_wo = mysqli_query($conn, $query);
 
           $row = mysqli_fetch_assoc($select_wo);
