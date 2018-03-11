@@ -159,7 +159,7 @@ $pending = selectallwos('Pending') / selectallwo() * 100;
           <div class="ibox-title">
                 <h5>Holiday </h5>
             </div>
-            <div class="panel-body" style="padding:0px;height:400px;overflow-y: scroll ">
+            <div class="panel-body" style="padding:0px;height:400px;overflow-y:scroll;font-size:11px; ">
               <?php
                     if(is_manager($_SESSION['u_name'])) {
                      echo "<table class='table table-hover''>
@@ -180,7 +180,7 @@ $pending = selectallwos('Pending') / selectallwo() * 100;
                     <td class='project-title'>{$end}</td>
                     <td class='project-title'>{$sig}</td>
                     <td style='top:10px; position:relative' class='project-status'><span class='label label-warning'>{$approved}</span></td>
-                    <td class='project-actions'><a href='booking.php?holiday_edit={$id}' class='btn btn-white btn-sm'>Edit</a><a href='booking.php?holiday_approve={$id}' class='btn btn-white btn-sm'>Approve</a></td>
+                    <td class='project-actions'><a href='booking.php?holiday_edit={$id}' class='btn btn-white btn-sm'>Edit</a></td>
                     </tr>";
                     }
                     $query->close();;

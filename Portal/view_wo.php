@@ -167,6 +167,13 @@ include_once "Includes/header.php";
                                                 $message = escape($_POST['u_message']);
                                                 $timedate = date("Y-m-d h:i:sa");
 
+                                                if ($wonum === '') {
+                                                  $log = "Failed to Fetch WO Number";
+                                                  $user = $_SESSION['u_name'];
+                                                  $newlog = new log();
+                                                  $newlog->logaction($log, $wonum, $user);
+                                                }
+
                                                 $addmessage = "INSERT INTO job_messages (Work_Order, u_name, message, time_added) ";
                                                 $addmessage .= "VALUES ('{$wonum}','{$tech}','{$message}','{$timedate}') ";
 
@@ -326,15 +333,13 @@ include_once "Includes/header.php";
                                 <br>
                                 <?php
 
-                               if ($status === 'Completed') {
+                               if ($status != 'Completed') {
+                                 echo '
 
-                                } else {
+                                 <div class="col-md-12 center-block" style="margin-bottom:5px;">
+                                   <button id="myBtn" class="btn btn-primary center-block btn-lg" data-toggle="modal" data-target="#myModal">Complete</button>
+                                   </div>';
 
-                                  echo '
-
-                                  <div class="col-md-12 center-block" style="margin-bottom:5px;">
-                                    <button id="myBtn" class="btn btn-primary center-block btn-lg" data-toggle="modal" data-target="#myModal">Complete</button>
-                                    </div>';
                                 }
                                 ?>
                                 </div>

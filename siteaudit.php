@@ -33,7 +33,7 @@ if (isset($_GET['id'])) {
 																 <dt>Nights on Site:</dt> <dd><?php echo $NOS;?></dd>
 														 </dl>
 													 </div>
-													 <div style="padding-left:3%;padding-right:3%">
+													 <div style="padding-left:3%;padding-right:3%;">
 												 <div class="form-group">
 														<label for="exampleSelect1">Parking Available?</label>
 														<select class="form-control">
@@ -41,7 +41,7 @@ if (isset($_GET['id'])) {
 															<option value="Yes">Yes</option>
 															<option value="No">No</option>
 														</select>
-														<label for="exampleTextarea">If yes/no please provide address details on where we can park</label>
+														<label for="exampleTextarea">If no please provide address details on where we can park</label>
 														<textarea class="form-control" rows="3" placeholder="Carpark 3"></textarea>
 													</div>
 													<div class="form-group">
@@ -57,11 +57,11 @@ if (isset($_GET['id'])) {
 													<div class="form-group">
 												    <label for="formGroupExampleInput">How many Floors in the Store?</label>
 												    <input type="text" class="form-control" placeholder="3">
-														<label for="exampleTextarea">Please indicate how many levels there are within the store and if there are lics to facilitate movement of cleaning machinery</label>
+														<label for="exampleTextarea">Please indicate if there are lifts to facilitate movement of cleaning machinery</label>
 														<textarea class="form-control" rows="3" placeholder=""></textarea>
 												  </div>
 													<div class="form-group">
-												    <label for="formGroupExampleInput">Contractual Works</label>
+												    <label for="formGroupExampleInput">Other ontractual Works</label>
 														<select class="form-control">
  															<option></option>
  															<option value="Yes">Yes</option>
@@ -77,7 +77,7 @@ if (isset($_GET['id'])) {
                                <option value="Yes">Yes</option>
                                <option value="No">No</option>
                              </select>
-                             <small>It is vital to the works if the Air Conditioning is left on overnight are you able to do this?</small>
+                             <small>It is vital to the works if the Air Conditioning is left on overnight please confirm if are you able to do this?</small>
                           </div>
                           <div class="form-group">
                             <label for="formGroupExampleInput">Lutron Panel</label>
@@ -104,7 +104,7 @@ if (isset($_GET['id'])) {
  															<option value="Yes">Yes</option>
  															<option value="No">No</option>
  														</select>
-														<label for="exampleTextarea">Please indicate if any product launches or promotions will be taking place and on which floors if any</label>
+														<label for="exampleTextarea">if there are any product launches or promotions please fill put details below</label>
 														<textarea class="form-control" rows="3" placeholder=""></textarea>
 												  </div>
                           <div class="form-group">
