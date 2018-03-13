@@ -368,6 +368,10 @@ echo "<p class='bg-sucess'> user Deleted.";
       $color = "#008000";
       $exploded = explode(",", $assignedtech);
 
+      If ($client = "Apple") {
+        $active = "Pending_Survey";
+      }
+
 
       //Create directory if Work order is set
 if(!empty($_POST['wo_number'] && $_SERVER['REQUEST_METHOD'] == "POST")) {
@@ -823,8 +827,8 @@ function handleimages($jobloc, $wonum, $tech, $id) {
 
 $path = "Images/wo_images/$wonum.$jobloc/";
 
-if (is_dir($path))
-  {
+if (!is_dir($path))
+  {   mkdir($path); }
   $valid_formats = array(
     "jpg",
     "jpeg",
@@ -854,42 +858,6 @@ if (is_dir($path))
       echo "Wrong File Extension";
       }
     }
-  }
-  else
-  {
-  mkdir($path);
-  if (is_dir($path))
-    {
-    $valid_formats = array(
-      "jpg",
-      "jpeg",
-      "JPEG",
-      "JPG",
-      "png"
-    );
-    foreach($_FILES['files']['name'] as $f => $name)
-      {
-      $fileext = explode('.', $name);
-      $actualExt = strtolower(end($fileext));
-      if (in_array($actualExt, $valid_formats))
-        {
-        $newfilename = round(microtime(true)) . '.' . $actualExt;
-        move_uploaded_file($_FILES['files']['tmp_name'][$f], $path . $newfilename);
-        $query = "INSERT INTO work_order_images (wo_number, Location, Uploader) ";
-        $query .= "VALUES ('{$wonum}','{$newfilename}','{$tech}') ";
-
-        $result = mysqli_query($conn, $query);
-
-        confirmQuery($result);
-        header("Location: view_wo.php?view_wo={$id}");
-
-        } else
-        {
-        echo "Wrong File Extension";
-        }
-      }
-    }
-  }
 }
 
 

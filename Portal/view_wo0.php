@@ -11,7 +11,7 @@ include_once "Includes/header.php";
                         <?php
           if (is_tech($_SESSION['u_name'])) {
           $tech = $_SESSION['u_first'];
-          if (isset($_GET['view_wo'])) {
+
           $woID = escape($_GET['view_wo']);
           $query = "SELECT * FROM work_orders WHERE ID = {$woID} OR Work_Order = {$woID}";
           $select_wo = mysqli_query($conn, $query);
@@ -51,7 +51,6 @@ include_once "Includes/header.php";
           $test->logaction($log, $wonum, $user );
 
           $date = date("d-m-Y");
-        } else { header("Location: wo_search.php");}
           ?>
           <div id="wrapper">
         <div class="row">
@@ -168,7 +167,7 @@ include_once "Includes/header.php";
                                                 $message = escape($_POST['u_message']);
                                                 $timedate = date("Y-m-d h:i:sa");
 
-                                                if ($wonum == '') {
+                                                if ($wonum === '') {
                                                   $log = "Failed to Fetch WO Number";
                                                   $user = $_SESSION['u_name'];
                                                   $newlog = new log();
@@ -334,12 +333,18 @@ include_once "Includes/header.php";
                                 <br>
                                 <?php
 
-                               if ($status != 'Completed') {
+                               if ($status == 'Pending') {
                                  echo '
 
                                  <div class="col-md-12 center-block" style="margin-bottom:5px;">
                                    <button id="myBtn" class="btn btn-primary center-block btn-lg" data-toggle="modal" data-target="#myModal">Complete</button>
                                    </div>';
+
+                                } elseif ($status = "Pending_Survey" && $client = "Apple" ) {
+                                  echo
+                                  '<div class="col-md-12 center-block" style="margin-bottom:5px;">
+                                    <button id="myBtn1" class="btn btn-primary center-block btn-lg" data-toggle="modal" data-target="#myModal1">Pre Survey</button>
+                                    </div>';
 
                                 }
                                 ?>
@@ -419,11 +424,57 @@ include_once "Includes/header.php";
               </div>
             </div>
           </div>
+<!-- PRe sruvey -->
+          <div id="mymodal1" class="modal fade bd-example-modal-lg">
+<!-- Modal content -->
+          <div class="modal-content" style="" >
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <div class="ibox-content" id="ibox">
+                <form method="POST" id="wizard" enctype="multipart/form-data">
+                <div id="example-basic">
+                  <h3></h3>
+                  <section>
+                    <div class="form-group">
+                        <label for="exampleSelect1">Floor Type</label>
+                        <select class="form-control" id="exampleSelect1" name="Floor_type">
+                            <option value="Inactive">Terrazzo</option>
+                            <option value="Pending">Sandstone</option>
+                            <option value="Completed">Wood</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleSelect1">Stains/Marks</label>
+                        <select class="form-control" id="exampleSelect1" name="Floor_type">
+                            <option value="Inactive">Good</option>
+                            <option value="Pending">Average</option>
+                            <option value="Completed">Poor</option>
+                            <option value="Completed">Filthy</option>
+                        </select>
+                      </div>
+                      <label for="title">How many Cracked Tiles</label>
+                      <input type="text" id="wonumber" placeholder="10" class="form-control" name="wo_number">
+                  </section>
+                  <h3></h3>
+                      <section>
 
-<!-- Modal Image uplaod -->
+                      </section>
+                  <h3></h3>
+                  <section>
+
+                  </section>
+                  <h3></h3>
+                  <section style="">
+
+                  <input class="btn btn-primary btn-lg center-block" id="submit" onClick="" type="submit" name="complete_survey" value="Complete">
+                  </section>
+              </div>
+            </form>
+        </div>
+      </div>
+
               <div id="mymodal2" class="modal">
   <!-- Modal content -->
-              <div class="modal-content" style=" display:inline-grid; background: grey;position: relative;float: left;left: 50%;top: 50%;transform: translate(-50%, -50%);">
+              <div class="modal-content" style="display:inline-grid; background: grey;position: relative;float: left;left: 50%;top: 50%;transform: translate(-50%, -50%);">
                 <div class="ibox-content">
                 <span class="close cursor" id="close">&times;</span>
                  <h1 style="text-align: center;">Your images are being uploaded do not leave this page</h1>
@@ -517,6 +568,8 @@ include_once "Includes/header.php";
 var modal = document.getElementById('mymodal');
 // Get the button that opens the modal
 var btn = document.getElementById("myBtn");
+
+var btn1 = document.getElementById("myBtn1");
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 // When the user clicks on the button, open the modal
@@ -545,6 +598,9 @@ window.onclick = function(event) {
   });
   $("#btnSubmit").click(function(){
   $('#mymodal2').modal('show');
+  });
+  $("#myBtn1").click(function(){
+  $('#mymodal1').modal('show');
   });
   });
 
