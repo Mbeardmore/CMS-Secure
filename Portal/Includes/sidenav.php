@@ -34,7 +34,7 @@ while ($row = mysqli_fetch_assoc($result))
             </li>
             <?php if (is_manager($_SESSION['u_name'])) { ?>
             <li>
-                <a href="Features.php"><i class="fa fa-bug"></i> <span class="nav-label" >Features Tracker</span></a>
+                <a href="Features.php"><i class="fa fa-bug"></i> <span class="nav-label" >Action Request</span></a>
             </li>
           <?php } ?>
             <li>

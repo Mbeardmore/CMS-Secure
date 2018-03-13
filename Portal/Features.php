@@ -2,6 +2,9 @@
 include "Includes/header.php";
 include "Includes/sidenav.php";
 include "Includes/topnav.php";
+
+
+$stmt = $conn->Prepare("");
 ?>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-sm-4">
@@ -23,7 +26,7 @@ include "Includes/topnav.php";
                         <div class="ibox-title">
                             <h5>Issue list</h5>
                             <div class="ibox-tools">
-                                <a href="" class="btn btn-primary btn-xs">Add new issue</a>
+                                <a href="new_ar.php" class="btn btn-primary btn-xs">Add new issue</a>
                             </div>
                         </div>
                         <div class="ibox-content">
@@ -79,7 +82,6 @@ include "Includes/topnav.php";
                                         <button class="btn btn-white btn-xs"> Rag</button>
                                     </td>
                                 </tr>
-
                                 </tbody>
                             </table>
                             </div>
@@ -88,6 +90,5 @@ include "Includes/topnav.php";
                     </div>
                 </div>
             </div>
-
-
         </div>
+<?php include "Includes/footer.php"; ?>

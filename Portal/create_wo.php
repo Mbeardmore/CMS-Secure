@@ -34,7 +34,7 @@
                 <div class="form-group" style="display:inline-grid;">
                 <label for="jobtype"> Job Type </label>
                 <select class="selectpicker" name="Jobtype">
-
+                 <option selected style="display:none;">Please Select One</option>
                     <option value="Apple_Strip_FOH_Ardex">Apple Deep & Seal FOH / Ardex </option>
                     <option value="Apple_Strip_FOH_NoArdex">Apple Deep & Seal FOH/Non Ardex</option>
                     <option value="Apple_Strip_FOH_Terrazzo">Apple Deep & Seal FOH / Terrazzo</option>
@@ -49,8 +49,6 @@
                     <option value="carpet_clean">Carpet Cleaning</option>
                     <option value="Slip_Treatment">Anti-Slip Treatment</option>
                     <option value="Annual Service">Annual Service </option>
-
-
                 </select>
                 </div>
                 <br>
@@ -114,7 +112,7 @@
                 <br>
                 <div style="position: relative;top:15px">
                 <label for="file">Work Order Files</label>
-                <div class="form-inline">
+                <div class="form-group">
                   <div class="form-group">
                     <input type="file" name="file[]"  id="js-upload-files" multiple="multiple">
                   </div>
@@ -130,6 +128,7 @@
                 <label for="jobtype">Client</label>
                 <br>
                 <select class="selectpicker" name="client">
+                    <option selected style="display:none;">Please Select One</option>
                     <option value="Apple">Apple</option>
                     <option value="KPMG">KPMG</option>
                     <option value="DFS">DFS</option>

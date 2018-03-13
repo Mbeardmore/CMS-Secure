@@ -83,36 +83,36 @@ function confirmQuery($result)
 }
 
 
-function ItemSearch()
-{
-    global $conn;
-
-    $stmt = $conn->prepare("SELECT ID, item_image, prod_name, supplier_name, P_PRICE_EXVAT, P_SELL, SIZE, stock_level, L_PURCHASE, Stock_Location FROM stock_management");
-    $stmt->execute();
-    $stmt->bind_result($ID, $item_image, $prod_name, $supplier_name, $P_PRICE_EXVAT, $P_SELL, $SIZE, $stock_level, $L_PURCHASE, $Stock_Location);
-
-    while($stmt->fetch()) {
-
-        echo "<tr>";
-        echo "<td>" . $ID . "</td>";
-        echo "<td>" . $item_image . "</td>";
-        echo "<td>" . $prod_name . "</td>";
-        echo "<td>" . $supplier_name . "</td>";
-        echo "<td>" . $P_PRICE_EXVAT . "</td>";
-        echo "<td>" . $P_SELL . "</td>";
-        echo "<td>" . $SIZE . "</td>";
-        echo "<td>" . $stock_level . "</td>";
-        echo "<td>" . $L_PURCHASE . "</td>";
-        echo "<td>" . $Stock_Location . "</td>";
-        echo "<td><a href='edit_item.php?edit_item={$ID}'>Edit</a></td>";
-        echo "<td><a href='item_search.php?delete_item={$ID}'>Delete</a></td>";
-        echo "</tr>";
-
-    }
-$stmt->close();
-
-
-}
+// function ItemSearch()
+// {
+//     global $conn;
+//
+//     $stmt = $conn->prepare("SELECT ID, item_image, prod_name, supplier_name, P_PRICE_EXVAT, P_SELL, SIZE, stock_level, L_PURCHASE, Stock_Location FROM stock_management");
+//     $stmt->execute();
+//     $stmt->bind_result($ID, $item_image, $prod_name, $supplier_name, $P_PRICE_EXVAT, $P_SELL, $SIZE, $stock_level, $L_PURCHASE, $Stock_Location);
+//
+//     while($stmt->fetch()) {
+//
+//         echo "<tr>";
+//         echo "<td>" . $ID . "</td>";
+//         echo "<td>" . $item_image . "</td>";
+//         echo "<td>" . $prod_name . "</td>";
+//         echo "<td>" . $supplier_name . "</td>";
+//         echo "<td>" . $P_PRICE_EXVAT . "</td>";
+//         echo "<td>" . $P_SELL . "</td>";
+//         echo "<td>" . $SIZE . "</td>";
+//         echo "<td>" . $stock_level . "</td>";
+//         echo "<td>" . $L_PURCHASE . "</td>";
+//         echo "<td>" . $Stock_Location . "</td>";
+//         echo "<td><a href='edit_item.php?edit_item={$ID}'>Edit</a></td>";
+//         echo "<td><a href='item_search.php?delete_item={$ID}'>Delete</a></td>";
+//         echo "</tr>";
+//
+//     }
+// $stmt->close();
+//
+//
+// }
 
 
 function selectall()
@@ -206,7 +206,6 @@ function createuser() {
     move_uploaded_file($postimage_tmp, "Images/user-images/$postimage ");
 
     $password = password_hash( $pwd, PASSWORD_BCRYPT, array('cost' => 12));
-
 
     $query = "INSERT INTO user (u_name, user_image, u_first, u_last, u_email, u_pwd, user_role) ";
     $query .= "VALUES ('{$username}','{$postimage}','{$fname}','{$lname}','{$email}','{$password}','{$userrole}') ";
@@ -368,9 +367,9 @@ echo "<p class='bg-sucess'> user Deleted.";
       $color = "#008000";
       $exploded = explode(",", $assignedtech);
 
-      If ($client = "Apple") {
-        $active = "Pending_Survey";
-      }
+    //  If ($client = "Apple") {
+    //    $active = "Pending_Survey";
+    // }
 
 
       //Create directory if Work order is set
@@ -510,11 +509,12 @@ while ($row = mysqli_fetch_assoc($user_wo_res)) {
                  echo "
               </td>
               <td class='project-title'>
-                  <a href='view_wo.php?view_wo={$id}'>{$jobloc} {$city}</a>
+                  <a href='view_wo.php?view_wo={$id}'> {$jobloc} {$city}<br>
+                  WO: {$wonum}</a>
                   <br>
                   <small>created: {$todaydate}</small>
                   <br>
-                  <Small> <b>Start Time @ unit:</b> {$startime}<small>
+                  <small><b>Start Time @ unit: {$startime}</b><small>
               </td>
               <td class='project-title'>
               <a href=''> Start date </a><br>
@@ -534,7 +534,7 @@ while ($row = mysqli_fetch_assoc($user_wo_res)) {
               </td>
           </tr>";
 }
-} else {}
+}
 
 }
 

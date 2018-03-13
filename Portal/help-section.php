@@ -20,7 +20,7 @@ if (isset($_GET['new_pdf'])) { ?>
   </div>
   <div class="form-group" style="width:75%">
       <label for="Job-Details">Description</label>
-      <textarea class="input-block-level" id="summernote" name="Description"></textarea>
+      <textarea class="input-block-level" id="summernote" name="Description" required></textarea>
       <script>
         $(document).ready(function() {
             $('#summernote').summernote({
@@ -37,7 +37,7 @@ if (isset($_GET['new_pdf'])) { ?>
         </label>
     </div>
     <div class="form-group">
-    <input class="btn btn-primary" type="submit" name="Add_Pdf" value="Add Video">
+    <input class="btn btn-primary" type="submit" name="Add_Pdf" value="Add PDF">
     </div>
   </form>
   <?php
@@ -49,6 +49,10 @@ if (isset($_GET['new_pdf'])) { ?>
   $pdf_tmp = $_FILES['image_upload']['tmp_name'];
   $valid_formats = array("pdf","xls","docx");
   $imageFileType = strtolower(pathinfo($pdf,PATHINFO_EXTENSION));
+
+  if($desc==="") {
+    echo "description needed";
+  }
 
   if(in_array($imageFileType, $valid_formats)) {
     move_uploaded_file($pdf_tmp, "Files/PDF/$pdf");
