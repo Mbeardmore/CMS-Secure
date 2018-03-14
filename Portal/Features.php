@@ -54,21 +54,29 @@ $stmt = $conn->Prepare("");
                             <div class="table-responsive">
                             <table class="table table-hover issue-tracker">
                                 <tbody>
-                                <tr>
+                                <?php
+                                $stmt = $conn->prepare("SELECT ID, AR_NO, AR_TYPE, AR_DETAILS, AR_TITLE, AR_REQUEST, AR_PRIORITY FROM features ");
+                                $stmt->execute();
+                                $stmt->bind_result($ID, $arno, $artype, $ardet, $artit, $arreq, $arprior);
+                                $stmt->store_result();
+
+                                while ($stmt->fetch()) {
+                                  echo "
+                                  <tr>
                                     <td>
-                                        <span class="label label-primary">New</span>
+                                        <span class='label label-primary'>New</span>
                                     </td>
-                                    <td class="issue-info">
-                                        <a href="#">
-                                            ISSUE-23
+                                    <td class='issue-info'>
+                                        <a href=''#''>
+                                            "; echo $artit; echo"
                                         </a>
 
                                         <small>
-                                            This is issue with the coresponding note
+                                            Requested By: "; echo $arreq; echo"
                                         </small>
                                     </td>
                                     <td>
-                                        Testing
+
                                     </td>
                                     <td>
                                         12.02.2015 10:00 am
@@ -76,12 +84,15 @@ $stmt = $conn->Prepare("");
                                     <td>
                                      2 Days
                                     </td>
-                                    <td class="text-right">
-                                        <button class="btn btn-white btn-xs"> Tag</button>
-                                        <button class="btn btn-white btn-xs"> Mag</button>
-                                        <button class="btn btn-white btn-xs"> Rag</button>
+                                    <td class='text-right'>
+                                        <button class='btn btn-white btn-xs'> Tag</button>
+                                        <button class='btn btn-white btn-xs'> Mag</button>
+                                        <button class='btn btn-white btn-xs'> Rag</button>
                                     </td>
-                                </tr>
+                                </tr>";
+
+                                }
+                                 ?>
                                 </tbody>
                             </table>
                             </div>

@@ -33,11 +33,11 @@
                  <form method="POST" enctype="multipart/form-data">
                 <div class="form-group" style="display:inline-grid;">
                 <label for="jobtype">AR Type</label>
-                <select class="selectpicker" name="Jobtype">
+                <select class="selectpicker" name="AR_type">
                  <option selected style="display:none;">Please Select One</option>
                     <option value="New_Feature">New Feature</option>
                     <option value="Bug">Report Bug</option>
-                   
+
                 </select>
                 </div>
                 <br>
@@ -45,48 +45,34 @@
                  <fieldset>
                   <div class="form-group">
                     <label for="textinput" style="">AR Title</label>
-                      <input type="text" style="max-width:60%" name="company" placeholder="New Feature: Client login" class="form-control">
+                      <input type="text" style="max-width:60%" name="AR-Title" placeholder="New Feature: Client login" class="form-control">
                     </div>
                 </fieldset>
-                <div class="form-group" name="dates" style="display:inline-table;">
-                <div class="form-group" style="max-width:45%;float:left;">
-                    <label for="date"> Start Date </label>
-                    <input type="date" class="form-control" id="date" name="start_date">
-                </div>
-                <div class="form-group" style="max-width:45%;float:right">
-                    <label for="date"> End Date </label>
-                    <input type="date" class="form-control" id="date" name="end_date">
-                </div>
-                </div>
-                 
                 <div class="form-group">
-                <label for="assigned">Site Contact</label>
-                <input type="text" class="form-control" name="site_contact">
+                <label for="assigned">Requested By</label>
+                <input type="text" class="form-control" name="Request">
                 </div>
                 <div class="form-group" >
                     <label for="Job-Details">AR Details</label>
-                    <textarea class="form-control" name="Job-Details" id="" cols="75" rows="10" style="float:left;" placeholder="Either details on how the bug occured,  or what features and how you want them to work"></textarea>
+                    <textarea class="form-control" name="AR-Details" id="" cols="75" rows="10" style="float:left;" placeholder="Either details on how the bug occured,  or what features and how you want them to work"></textarea>
                 </div>
-
                 <div class="form-group" style="position: relative;top:30px">
-                    <input class="btn btn-primary" type="submit" name="create_wo" value="create">
+                    <input class="btn btn-primary" type="submit" name="create_AR" value="create">
                 </div>
             </div>
                 </div>
                 <div class="col" style="float:right;width:45%">
-                 <div class="form-group">
-                <label for="jobtype">Priority</label>
-                <br>
-                <select class="selectpicker" name="client">
-                    <option selected style="display:none;">Please Select One</option>
-                    <option value="Apple">High</option>
-                    <option value="Apple">Medium</option>
-                    <option value="Apple">low</option>
-                </select>
-                </div>
+                  <div class="form-group">
+                      <label for="exampleSelect1">Priority</label>
+                      <select class="form-control" id="exampleSelect1" name="Priority">
+                          <option value="High">High</option>
+                          <option value="Medium">Medium</option>
+                          <option value="Low">Low</option>
+                      </select>
+                  </div>
                 <div class="form-group">
                     <label for="title">AR Number</label>
-                    <input type="text" id="wonumber" class="form-control" name="wo_number">
+                    <input type="text" id="wonumber" class="form-control" name="AR_number">
                 </div>
                 <br>
             </form>
@@ -99,8 +85,18 @@
 </div>
 </div>
  <?php
-if (isset($_POST['create_wo'])) {
-createworkorder();
+if (isset($_POST['create_AR'])) {
+  $ARtitle   = $_POST['AR-Title'];
+  $ARType    = $_POST['AR_type'];
+  $ARNumber  = $_POST['AR_number'];
+  $Requested = $_POST['Request'];
+  $Priority  = $_POST['Priority'];
+  $ARDetails = $_POST['AR-Details'];
+  $stmt = $conn->prepare("INSERT INTO features (AR_NO, AR_TYPE, AR_TITLE, AR_DETAILS, AR_REQUEST, AR_PRIORITY) VALUES (?,?,?,?,?,?)");
+  $stmt->bind_param("isssss", $ARNumber, $ARType, $ARtitle, $ARDetails, $Requested, $Priority);
+  $stmt->execute();
+  $stmt->close();
+
 }?>
 
 </body>

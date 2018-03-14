@@ -39,6 +39,7 @@ include_once "Includes/header.php";
           $clientsig      = $row['Client_sig'];
           $satisfaction   = $row['sat_rating'];
           $com_summary    = $row['Summary'];
+          $survey         = $row['survey'];
 
           $start = new DateTime($datestart);
           $end = new DateTime($dateend);
@@ -332,20 +333,17 @@ include_once "Includes/header.php";
                                 </div>
                                 <br>
                                 <?php
-
-                               if ($status == 'Pending') {
+                              if ($status === 'Pending' && $survey ===  '0') {
                                  echo '
-
                                  <div class="col-md-12 center-block" style="margin-bottom:5px;">
                                    <button id="myBtn" class="btn btn-primary center-block btn-lg" data-toggle="modal" data-target="#myModal">Complete</button>
                                    </div>';
 
-                                } elseif ($status = "Pending_Survey" && $client = "Apple" ) {
+                                } elseif ($status ==='Pending' && $survey === '1' && $client === "Apple") {
                                   echo
                                   '<div class="col-md-12 center-block" style="margin-bottom:5px;">
                                     <button id="myBtn1" class="btn btn-primary center-block btn-lg" data-toggle="modal" data-target="#myModal1">Pre Survey</button>
                                     </div>';
-
                                 }
                                 ?>
                                 </div>
@@ -432,46 +430,158 @@ include_once "Includes/header.php";
             <div class="ibox-content" id="ibox">
                 <form method="POST" id="wizard" enctype="multipart/form-data">
                 <div id="example-basic">
-                  <h3></h3>
+                  <h3>Floor</h3>
                   <section>
                     <div class="form-group">
                         <label for="exampleSelect1">Floor Type</label>
                         <select class="form-control" id="exampleSelect1" name="Floor_type">
-                            <option value="Inactive">Terrazzo</option>
-                            <option value="Pending">Sandstone</option>
+                            <option value="Terrazo">Terrazzo</option>
+                            <option value="SandStone">Sandstone</option>
                             <option value="Completed">Wood</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="exampleSelect1">Stains/Marks</label>
-                        <select class="form-control" id="exampleSelect1" name="Floor_type">
+                        <select class="form-control" id="exampleSelect1" name="Floor_Stains">
                             <option value="Inactive">Good</option>
                             <option value="Pending">Average</option>
                             <option value="Completed">Poor</option>
                             <option value="Completed">Filthy</option>
                         </select>
                       </div>
+                      <div class="form-group">
                       <label for="title">How many Cracked Tiles</label>
-                      <input type="text" id="wonumber" placeholder="10" class="form-control" name="wo_number">
+                      <input type="text" id="wonumber" placeholder="10" class="form-control" name="Tiles">
+                    </div>
+                    <div class="form-group">
+                      <label>Grouting Damage?</label><br>
+                 <textarea required="required" class="form-control" id="exampleTextarea" rows="3" style="height:167px" name="Grout_desc" placeholder="If yes please Explain"></textarea>
+               </div>
                   </section>
-                  <h3></h3>
+                  <h3>Fixtures & fittings</h3>
                       <section>
+                        <div class="form-group">
+                            <label for="exampleSelect1">Is there any table damage?</label>
+                            <select class="form-control" id="exampleSelect1" name="Table_damage">
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleSelect1">Tables Plug & Play</label>
+                            <select class="form-control" id="Tables" name="Tables">
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleSelect1">Stainless Steel up to 5ft</label>
+                            <br>
+                            <small>Is there any marks/Damage</small>
+                            <select class="form-control" id="Tables" name="steel">
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                          <label for="summary">Summary</label>
+                          <textarea required="required" class="form-control" id="exampleTextarea" rows="3" style="height:167px" name="Fixtures_Desc" placeholder="Further Detail"></textarea>
+                        </div>
 
                       </section>
-                  <h3></h3>
+                  <h3>Boh & Washroom Floors</h3>
                   <section>
-
-                  </section>
-                  <h3></h3>
-                  <section style="">
-
-                  <input class="btn btn-primary btn-lg center-block" id="submit" onClick="" type="submit" name="complete_survey" value="Complete">
+                    <div class="form-group">
+                        <label for="exampleSelect1">Floor Type</label>
+                        <select class="form-control" id="Tables" name="Boh_Floortype">
+                            <option value="Vinyl">Vinyl</option>
+                            <option value="Rubber">Rubber</option>
+                            <option value="Concrete">Concrete</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleSelect1">Appearence</label>
+                        <select class="form-control" id="exampleSelect1" name="Floor_Appearence">
+                            <option value="Inactive">Good</option>
+                            <option value="Pending">Average</option>
+                            <option value="Poor">Poor</option>
+                            <option value="Filthy">Filthy</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label>Washroom Grouting Damage?</label><br>
+                   <textarea required="required" class="form-control" id="exampleTextarea" rows="3" style="height:167px" name="Washroom_grouting" placeholder="If yes please Explain"></textarea>
+                 </div>
+                 <div class="form-group">
+                   <input type="file" name="images[]" id="js-upload-files" multiple>
+                 </div>
+                 <button type="submit" class="btn btn-primary btn-lg center-block" name="complete_upload" id="btnSubmit">Complete</button>
                   </section>
               </div>
             </form>
         </div>
       </div>
 
+      <?php
+      If (isset($_POST['complete_upload'])) {
+        $fohfloortype = $_POST['Floor_type'];
+        $fohstains    = $_POST['Floor_Stains'];
+        $tiles        = $_POST['Tiles'];
+        $groutdesc    = $_POST['Grout_desc'];
+        $tabledam     = $_POST['Table_damage'];
+        $pptable      = $_POST['Tables'];
+        $steel        = $_POST['steel'];
+        $fixtures     = $_POST['Fixtures_Desc'];
+        $bohFloortype = $_POST['Boh_Floortype'];
+        $bohFloorApp  = $_POST['Floor_Appearence'];
+        $WashroomGrout= $_POST['Washroom_grouting'];
+        $stmt = $conn->prepare("UPDATE work_orders SET FOH_floortype = ?, FOH_stains = ?, DAM_Tiles = ?, FOH_Groutdesc = ?, FOH_tabledamage = ?, FOH_TablePP = ?, FOH_Steel = ?, Fixtures_desc = ?, BOH_Floortype = ?, BOH_Floorapp = ?, Wash_grout = ? WHERE ID = {$id} ");
+        $stmt->bind_param("sssssssssss", $fohfloortype, $fohstains, $tiles, $groutdesc, $tabledam, $pptable, $steel, $fixtures, $bohFloortype, $bohFloorApp, $WashroomGrout);
+        echo $id;
+        $stmt->execute();
+        $stmt->close();
+        $stmt = $conn->prepare("UPDATE work_orders SET survey = '1' WHERE ID = {$id} ");
+        $stmt->execute();
+        $stmt->close();
+
+
+        $path = "Images/wo_images/{$wonum}.{$jobloc}/Pre_Survey/";
+
+        if (!is_dir($path))
+          {   mkdir($path);
+           }
+
+        $valid_formats = array(
+          "jpg",
+          "jpeg",
+          "JPEG",
+          "JPG",
+          "png"
+        );
+        foreach($_FILES['images']['name'] as $f => $name)
+          {
+
+          $fileext = explode('.', $name);
+          $actualExt = strtolower(end($fileext));
+          if (in_array($actualExt, $valid_formats))
+            {
+            $newfilename = round(microtime(true)) . '.' . $actualExt;
+            move_uploaded_file($_FILES['images']['tmp_name'][$f], $path . $newfilename);
+            $query = "INSERT INTO work_order_images (wo_number, Location, Uploader, GRP) ";
+            $query .= "VALUES ('{$wonum}','{$newfilename}','{$tech}','1') ";
+
+            $result = mysqli_query($conn, $query);
+
+            confirmQuery($result);
+            header("Location: view_wo.php?view_wo={$id}");
+            }
+            else
+            {
+            echo "Wrong File Extension";
+            }
+          }
+}
+       ?>
               <div id="mymodal2" class="modal">
   <!-- Modal content -->
               <div class="modal-content" style="display:inline-grid; background: grey;position: relative;float: left;left: 50%;top: 50%;transform: translate(-50%, -50%);">
@@ -593,14 +703,14 @@ window.onclick = function(event) {
       objDiv.scrollTop = objDiv.scrollHeight;
 
   $(document).ready(function () {
-  $("#modal").click(function(){
-  $('#myModal').modal('show');
-  });
   $("#btnSubmit").click(function(){
   $('#mymodal2').modal('show');
   });
   $("#myBtn1").click(function(){
   $('#mymodal1').modal('show');
+  });
+  $("#myBtn").click(function(){
+  $('#mymodal').modal('show');
   });
   });
 

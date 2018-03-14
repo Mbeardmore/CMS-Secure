@@ -417,8 +417,8 @@ if(!empty($_POST['wo_number'] && $_SERVER['REQUEST_METHOD'] == "POST")) {
       }
     }
 
-      $query = "INSERT INTO work_orders (Job_type, creator, Work_Order, job_location, company, street, city, date_today, date_start, date_end, Assigned_user, job_info, floor_size, Start, status, site_contact, client, `work_order_link`) ";
-      $query .= "VALUES ('{$jobtype}','{$creator}','{$wonumber}','{$joblocation}','{$company}','{$street}','{$city}','{$datetoday}','{$startdate}','{$enddate}','{$assignedtech}','{$Jobdetails}','{$floorsize}','{$start_time}','{$active}','{$sitecontact}','{$client}','{$WOlink}') ";
+      $query = "INSERT INTO work_orders (Job_type, creator, Work_Order, job_location, company, street, city, date_today, date_start, date_end, Assigned_user, job_info, floor_size, Start, status, site_contact, client, survey, `work_order_link`) ";
+      $query .= "VALUES ('{$jobtype}','{$creator}','{$wonumber}','{$joblocation}','{$company}','{$street}','{$city}','{$datetoday}','{$startdate}','{$enddate}','{$assignedtech}','{$Jobdetails}','{$floorsize}','{$start_time}','{$active}','{$sitecontact}','{$client}','1','{$WOlink}') ";
       $result = mysqli_query($conn, $query);
       confirmQuery($result);
 
@@ -828,7 +828,8 @@ function handleimages($jobloc, $wonum, $tech, $id) {
 $path = "Images/wo_images/$wonum.$jobloc/";
 
 if (!is_dir($path))
-  {   mkdir($path); }
+  {   mkdir($path);
+   }
   $valid_formats = array(
     "jpg",
     "jpeg",
