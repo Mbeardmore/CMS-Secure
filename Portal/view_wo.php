@@ -1,14 +1,10 @@
 <?php
 include_once "Includes/header.php";
 ?>
-<body>
-    <div id="wrapper">
         <?php
         include "Includes/sidenav.php";
         include "Includes/topnav.php";
-        ?>
-                    <div class="ibox-content" style="background-color:#f3f3f4;">
-                        <?php
+
           if (is_tech($_SESSION['u_name'])) {
           $tech = $_SESSION['u_first'];
           if (isset($_GET['view_wo'])) {
@@ -53,12 +49,12 @@ include_once "Includes/header.php";
           $date = date("d-m-Y");
         } else { header("Location: wo_search.php");}
           ?>
-          <div id="wrapper">
+      <div id="wrapper" class="gray-bg" style="padding:0px;">
         <div class="row">
             <div class="col-lg-9">
-                <div class="wrapper wrapper-content animated fadeInUp">
+                <div class="wrapper wrapper-content animated fadeInUp" style="padding:0px;">
                     <h1></h1>
-                    <div class="ibox">
+                    <div class="ibox" style="20px 20px 20px 20px">
                         <div class="ibox-content">
                             <div class="row">
                                 <div class="col-lg-12">
@@ -93,14 +89,13 @@ include_once "Includes/header.php";
                                     </dl>
                                 </div>
                             </div>
-
                             <div class="row m-t-sm">
-                                <div class="col-lg-12">
-                                <div class="panel blank-panel">
+                                <div class="col-lg-12" style="Padding:0px;">
+                                <div class="panel blank-panel" style="padding-right:auto;">
                                 <div class="panel-heading">
                                     <div class="panel-options">
-                                        <ul class="nav nav-tabs">
-                                            <li class="active"><a href="#tab-1" data-toggle="tab">Users messages</a></li>
+                                        <ul class="nav nav-tabs" id="myTab">
+                                            <li class=""><a href="#tab-1" data-toggle="tab">Users messages</a></li>
                                             <li class=""><a href="#tab-2" data-toggle="tab">Notes</a></li>
                                             <?php if ($wonum === '') {
                                             } else {
@@ -200,11 +195,12 @@ include_once "Includes/header.php";
                                     <input type="hidden" name="<?php echo ini_get("session.upload_progress.name"); ?>" value="123"/>
                                     <div class="form-inline">
                                       <div class="form-group">
-                                        <input type="file" name="files[]" id="js-upload-files" multiple>
-
+                                       <input type="file" name="files[]" id="js-upload-files" multiple>
                                       </div>
+
                                       <button type="submit" class="btn btn-sm btn-primary" name="upload" id="btnSubmit">Upload files</button>
                                     </div>
+                                    <small>Please Upload no more than 10 files at a time</small>
                                   </form>
                                   <?php if(is_manager($_SESSION['u_name'])) { ?>
                                   <form method="post">
@@ -503,7 +499,6 @@ include_once "Includes/header.php";
           </form>
               </div>
             <?php
-
             if (isset($_POST['complete_wo'])) {
               completewo($wonum, $id);
              }
@@ -511,8 +506,10 @@ include_once "Includes/header.php";
           </div>
           </div>
           </div>
+        </div>
 <?php  include "Includes/footer.php"; ?>
 <script>
+$('#myTab').tabCollapse();
 // Get the modal
 var modal = document.getElementById('mymodal');
 // Get the button that opens the modal

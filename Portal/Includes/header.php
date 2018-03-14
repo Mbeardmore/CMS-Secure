@@ -31,5 +31,6 @@ include "classes.php";
     <link rel="stylesheet" href="../css/jquery.steps.css">
     <script src="../js/plugins/steps/jquery.steps.min.js"></script>
     <script src="../js/numeric-1.2.6.min.js"></script>
+    <script src="../js/bootstrap-tabcollapse.js"></script>
 </head>
 <body>

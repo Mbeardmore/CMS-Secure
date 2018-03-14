@@ -15,7 +15,7 @@
                 <li>
                     <span class="m-r-sm text-muted welcome-message"></span>
                 </li>
-               
+
                 <li>
                     <a href="Includes/logout.php">
                         <i class="fa fa-sign-out"></i> Log out
