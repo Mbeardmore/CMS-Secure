@@ -2,9 +2,6 @@
 include "Includes/header.php";
 include "Includes/sidenav.php";
 include "Includes/topnav.php";
-
-
-$stmt = $conn->Prepare("");
 ?>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-sm-4">
@@ -26,7 +23,7 @@ $stmt = $conn->Prepare("");
                         <div class="ibox-title">
                             <h5>Issue list</h5>
                             <div class="ibox-tools">
-                                <a href="new_ar.php" class="btn btn-primary btn-xs">Add new issue</a>
+                                <a href="action-request.php" class="btn btn-primary btn-xs">Add new issue</a>
                             </div>
                         </div>
                         <div class="ibox-content">
@@ -34,60 +31,67 @@ $stmt = $conn->Prepare("");
                             <div class="m-b-lg">
 
                                 <div class="input-group">
-                                    <input type="text" placeholder="Search issue by name..." class=" form-control">
+                                    <input type="text" placeholder="Search issue by name..." class=" form-control" hidden>
                                     <span class="input-group-btn">
-                                        <button type="button" class="btn btn-white"> Search</button>
+                                        <button type="button" class="btn btn-white" hidden> Search</button>
                                     </span>
                                 </div>
                                 <div class="m-t-md">
-                                    <div class="pull-right">
-                                        <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-comments"></i> </button>
-                                        <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-user"></i> </button>
-                                        <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-list"></i> </button>
-                                        <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-pencil"></i> </button>
-                                        <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-print"></i> </button>
-                                        <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-cogs"></i> </button>
-                                    </div>
-                                    <strong>Found  issues.</strong>
+
+                                    <strong>Action Requests</strong>
                                 </div>
                             </div>
                             <div class="table-responsive">
                             <table class="table table-hover issue-tracker">
                                 <tbody>
                                 <?php
-                                $stmt = $conn->prepare("SELECT ID, AR_NO, AR_TYPE, AR_DETAILS, AR_TITLE, AR_REQUEST, AR_PRIORITY FROM features ");
+                                $date="";
+                                $stmt = $conn->prepare("SELECT ID, AR_NO, AR_TYPE, AR_DETAILS, AR_TITLE, AR_REQUEST, AR_PRIORITY, AR_DATE FROM features ");
                                 $stmt->execute();
-                                $stmt->bind_result($ID, $arno, $artype, $ardet, $artit, $arreq, $arprior);
+                                $stmt->bind_result($ID, $arno, $artype, $ardet, $artit, $arreq, $arprior, $date);
                                 $stmt->store_result();
+                                $today = date_create(date("Y-m-d"));
 
                                 while ($stmt->fetch()) {
+
+                                  $ardate= date_create($date);
+
+                                  $tage= $today->diff($ardate)->format('%a Days');
+                                  if($ardate->diff($today)->days < 3) {
+                                    $age = "New ".$artype;
+                                    $label = "primary";
+
+                                  } else {
+                                    $age = $artype;
+                                    $label = "warning";
+                                  }
+
                                   echo "
                                   <tr>
                                     <td>
-                                        <span class='label label-primary'>New</span>
+                                        <span class='label label-$label'>{$age}</span>
                                     </td>
                                     <td class='issue-info'>
-                                        <a href=''#''>
-                                            "; echo $artit; echo"
+                                        <a href='view_ar.php?view_arID={$ID}'>
+                                             $artit
                                         </a>
-
                                         <small>
-                                            Requested By: "; echo $arreq; echo"
+                                            Requested By: $arreq
                                         </small>
                                     </td>
                                     <td>
+                                    Date Created: <br> $date
+                                    </td>
+                                    <td>
+                                    Age: <br>
+                                    $tage
+                                    </td>
+                                    <td>
 
                                     </td>
-                                    <td>
-                                        12.02.2015 10:00 am
-                                    </td>
-                                    <td>
-                                     2 Days
-                                    </td>
                                     <td class='text-right'>
-                                        <button class='btn btn-white btn-xs'> Tag</button>
-                                        <button class='btn btn-white btn-xs'> Mag</button>
-                                        <button class='btn btn-white btn-xs'> Rag</button>
+                                        <button class='btn btn-white btn-xs'>View</button>
+                                        <button class='btn btn-white btn-xs'>Client</button>
                                     </td>
                                 </tr>";
 

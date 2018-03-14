@@ -35,7 +35,7 @@
                 <label for="jobtype">AR Type</label>
                 <select class="selectpicker" name="AR_type">
                  <option selected style="display:none;">Please Select One</option>
-                    <option value="New_Feature">New Feature</option>
+                    <option value="Feature">New Feature</option>
                     <option value="Bug">Report Bug</option>
 
                 </select>
@@ -70,9 +70,11 @@
                           <option value="Low">Low</option>
                       </select>
                   </div>
-                <div class="form-group">
+                <div class="form-group" hidden>
                     <label for="title">AR Number</label>
-                    <input type="text" id="wonumber" class="form-control" name="AR_number">
+                    <br>
+                    <small>please do not change</small>
+                    <input type="text" id="wonumber" class="form-control" name="AR_number" hidden>
                 </div>
                 <br>
             </form>
@@ -92,8 +94,9 @@ if (isset($_POST['create_AR'])) {
   $Requested = $_POST['Request'];
   $Priority  = $_POST['Priority'];
   $ARDetails = $_POST['AR-Details'];
-  $stmt = $conn->prepare("INSERT INTO features (AR_NO, AR_TYPE, AR_TITLE, AR_DETAILS, AR_REQUEST, AR_PRIORITY) VALUES (?,?,?,?,?,?)");
-  $stmt->bind_param("isssss", $ARNumber, $ARType, $ARtitle, $ARDetails, $Requested, $Priority);
+  $date      = date("Y-m-d");
+  $stmt = $conn->prepare("INSERT INTO features (AR_NO, AR_TYPE, AR_TITLE, AR_DETAILS, AR_REQUEST, AR_PRIORITY, AR_DATE) VALUES (?,?,?,?,?,?,?)");
+  $stmt->bind_param("issssss", $ARNumber, $ARType, $ARtitle, $ARDetails, $Requested, $Priority, $date);
   $stmt->execute();
   $stmt->close();
 
